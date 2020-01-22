@@ -1,0 +1,120 @@
+<html>
+
+<head>
+    <title>Pol Carrera Porfolio</title>
+    <style type="text/css">
+        html{
+            font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+            overflow: hidden;
+        }
+        body{
+            height: 300vh;
+        }
+
+        #ProfilePic{
+            width: 10vw;
+            
+        }
+
+        #Header{
+            margin-top: 2vh;
+            margin-left: 5vw;
+            position: absolute;
+        }
+        .HeaderButton{
+
+            background-color: #555;
+            color: white;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 3vh 5vw;
+            font-size: 1vw;
+            font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+
+        }
+
+        #Intro{
+ 
+            position: absolute;
+            color: #FFF;
+
+   
+            margin: 15vh 5vw 0;
+            padding: 8px;
+            background: rgba(1, 1, 1, 0.5);
+
+            user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
+
+        }
+
+        #info {
+            position: absolute;
+            color: #FFF;
+
+   
+            margin: 30vh 5vw 0;
+            padding: 8px;
+            background: rgba(1, 1, 1, 0.5);
+
+            user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
+
+        }
+
+
+        .HeaderButton:hover {
+            background-color: #777;
+
+        }
+        .ContactorIMG{
+          display: none;
+        }
+        h1{
+            font-size: 2.5em;
+            margin: 1vh 0;
+        }
+   
+
+    </style>
+    <link rel="stylesheet" href="asteroids.css">
+</head>
+<body>
+    <div id = "Header">
+        <button class = "HeaderButton">HOME</button>
+        <button class = "HeaderButton">PROJECTS</button>
+        <button class = "HeaderButton">ABOUT ME</button>
+    </div>
+    <br>
+    <div id = Intro>
+        <h2> Hi I'm <h2>
+        <h1>Pol Carrera Catalina </h1>
+        <h3> And welcome to my  <span style="color: #FF5900">interactive porfolio!</span> </h3>
+    </div>
+    <div id="info">
+        <p>Move arround and collide or shoot the green balls to show a project</p>
+        <br>
+        <p>If you don't want to play you can check my projects freely at the projects tab</p>
+        <br>
+        <p>CLICK on the screen to MOVE</p>
+        <p>Use [SPACE] to SHOOT</p>
+
+    </div>
+    <div display="none">
+        <img id = "malitaIMG" class = "ContactorIMG" src="data/Games/malita.png"/>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript" src = "asteroids2.js">
+    </script>
+
+</body>
+
+</html>
