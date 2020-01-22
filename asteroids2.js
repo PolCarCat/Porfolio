@@ -317,6 +317,7 @@ class Contactor
 		this.rectH = 250;
 		this.rectOffsetY = 200;
 		this.rectOffsetX = 0;
+		this.collided = false;
   	}
 	
 }
@@ -811,6 +812,8 @@ function checkShipContactorCollisions()
 			s.idle = true;
 			s.vel.setXY(0, 0);
 
+			a.collided = true;
+
 			generateShipExplosion();
 		}
 
@@ -1042,7 +1045,11 @@ function renderContactors()
 
 		context.closePath();
 
-		drawRectangle(a.pos.getX() - a.rectOffsetX, a.pos.getY() - a.rectOffsetY, a.rectW, a.rectH, a.imgID);
+		var color;
+		if (a.collided) color = a.color; 
+		else color = '#FF5900';
+
+		drawRectangle(a.pos.getX() - a.rectOffsetX, a.pos.getY() - a.rectOffsetY, a.rectW, a.rectH, a.imgID, color);
 
 		context.font = "30px monospace";
 		context.fillStyle = "white";
@@ -1055,9 +1062,9 @@ function renderContactors()
 	}
 }
 
-function drawRectangle(x, y, w, h, imgID)
+function drawRectangle(x, y, w, h, imgID, color)
 {
-	context.strokeStyle = '#FF5900';
+	context.strokeStyle = color;
 	context.strokeRect(x - (w/2), y - (h/2), w, h);
 
 	context.fillStyle = "rgba(0, 0, 0, 0.5)";
