@@ -1,0 +1,7 @@
+data = {"Modals":[    
+    {"id":"AboutMe", "title":"About Me", "img":"imglink", "video": "", 
+    	"desc": "Hi, my name is Pol Carrera and I've just finished the 3rd grade in the Bachelor's degree in Video Games by the UPC at CITM. I’m 21 years old and since I I’m still studying i don’t have any experience working in the Video Game industry but I can’t wait to start doing it."},    
+    {"id":"Malita", "title":"Malita Soul of a Warrior", "img":"imglink", "video": "", "desc": "dwadawdw"}, 
+    {"id":"PaPa", "title":"Parallax Paradox", "img":"imglink", "video": "", "desc": ""},      
+  
+]}  

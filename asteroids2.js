@@ -315,7 +315,7 @@ class Contactor
 		this.title = title;
 		this.rectW = 250;
 		this.rectH = 250;
-		this.rectOffsetY = 200;
+		this.rectOffsetY = 0;
 		this.rectOffsetX = 0;
 		this.collided = false;
   	}
@@ -368,7 +368,7 @@ var Ship = (function()
 			if(this.idle)
 			{
 				this.vel.setXY(0,0);
-				if(++this.idleDelay > 120)
+				if(++this.idleDelay > 40)
 				{
 					this.idleDelay = 0;
 					this.idle = false;
@@ -448,12 +448,10 @@ window.onload = function()
 
 
 	contactors = [];
-	var about = generateContactor(200, 600, "mai", "About me", 0);
+	var about = generateContactor(200, 600, "mai", "About me", "AboutMe");
 	about.rectH = 100;
-	about.rectOffsetX = 0;
-	about.rectOffsetY = -110;
 
-	generateContactor(200, 1200, "malitaIMG", "Malita SoW", 0);
+	generateContactor(200, 1200, "malitaIMG", "Malita SoW", "Malita");
 
 	loop();
 };
@@ -526,7 +524,7 @@ function asteroidInit()
 
 function shipInit()
 {
-	ship = Ship.create(screenWidth >> 1, screenHeight >> 1, this);
+	ship = Ship.create(screenWidth >> 1, 500, this);
 }
 
 function loop()
@@ -546,6 +544,7 @@ function loop()
 var mouseX = 0;
 var mouseY = 0;
 var mousedown = false;
+var focus = false;
 
 window.addEventListener("mousemove", function(e){
 	mouseX = e.clientX;
@@ -560,8 +559,18 @@ window.addEventListener('mouseup', function(e) {
  	mousedown = false;
 });
 
+
+function OnFocus(f){
+	focus = f;
+}
+
 function updateShip()
 {
+	if (focus) {
+		ship.vel.setXY(0,0);
+		return;
+	}
+
 	ship.update();
 
 	if(ship.idle) return;
@@ -815,6 +824,8 @@ function checkShipContactorCollisions()
 			a.collided = true;
 
 			generateShipExplosion();
+			SetContent(a.modalID);
+			ShowModal();
 		}
 
 	}
@@ -1030,20 +1041,20 @@ function renderContactors()
 	{
 		var a = contactors[i];
 
-		context.beginPath();
-		context.lineWidth = (Math.random() > 0.1) ? 7 : 6;
-		context.strokeStyle = a.color;
+		// context.beginPath();
+		// context.lineWidth = (Math.random() > 0.1) ? 7 : 6;
+		// context.strokeStyle = a.color;
 
-		var j = a.sides;
-		context.moveTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
-		for(j; j > -1; --j)
-		{
-			context.lineTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
-		}
+		// var j = a.sides;
+		// context.moveTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
+		// for(j; j > -1; --j)
+		// {
+		// 	context.lineTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
+		// }
 
-		if(Math.random() > 0.05) context.stroke();
+		// if(Math.random() > 0.05) context.stroke();
 
-		context.closePath();
+		// context.closePath();
 
 		var color;
 		if (a.collided) color = a.color; 
@@ -1065,17 +1076,42 @@ function renderContactors()
 function drawRectangle(x, y, w, h, imgID, color)
 {
 	context.strokeStyle = color;
-	context.strokeRect(x - (w/2), y - (h/2), w, h);
+	//context.strokeRect(x - (w/2), y - (h/2), w, h);
 
-	context.fillStyle = "rgba(0, 0, 0, 0.5)";
+	context.lineWidth = (Math.random() > 0.2) ? 4 : 3;
 
-	context.fillRect(x - (w/2), y - (h/2), w, h);
+	//context.fillRect(x - (w/2), y - (h/2), w, h);
+	drawRecnagleRounded(x - (w/2), y - (h/2), w, h, 10);
 	var img = document.getElementById(imgID);
 
 	if (img) context.drawImage(img, x - (w/2), y - (h/2), w , h);			
 
 
 	context.closePath();
+}
+
+function drawRecnagleRounded (x, y, w, h, r) {
+
+	w -= r/2;
+	h -= r/2;
+
+	context.fillStyle = "rgba(0, 0, 0, 0.5)";
+
+  	context.beginPath();
+  	context.moveTo(x+r, y - r);
+  	context.lineTo(x+w-r, y - r);
+  	context.lineTo(x+w+r, y + r);
+  	context.lineTo(x+w+r, y + h - r );
+  	context.lineTo(x+w-r, y +h + r);
+  	context.lineTo(x+r, y + h + r);
+  	context.lineTo(x-r, y + h - r);
+  	context.lineTo(x-r, y + r);
+  	context.lineTo(x + r, y - r);
+
+  	context.fill();
+	if(Math.random() > 0.05) context.stroke();
+  	context.closePath();
+
 }
 
 function renderScanlines()
