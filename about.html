@@ -1,0 +1,152 @@
+<html>
+<head>
+    <style type="text/css">
+
+        html{
+            font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+            overflow: scroll;
+
+        }
+
+        body {
+            background: #262626;
+            margin-left: 10px;  
+        }
+
+        .divider {
+            background-color:white; 
+            height: 2px; 
+            width:60%;
+            margin: 10px 0;
+        }
+
+        #Header{
+            padding-top: 20px;
+            padding-left: 20px;
+
+        }
+
+        #ProjectsHeader{
+            margin-top: 10vh;
+            margin-left: 1.5vw;
+        }
+
+        .ProjectsDiv{
+            margin-top: 50px;
+            margin-left: 1.5vw;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        .row {
+          margin: 8px -16px;
+        }
+
+        /* Add padding BETWEEN each column (if you want) */
+        .row {
+           padding: 8px;
+           width: 90%;
+        }
+
+        /* Create three equal columns that floats next to each other */
+        .column {
+          float: left;
+          width: 33%;
+          display: none; /* Hide columns by default */
+          height: 300px;
+          margin-bottom: 50px;
+          padding: 8px;
+        }
+
+        /* Clear floats after rows */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        /* Content */
+        .content {
+          background-color: white;
+          padding: 10px;
+        }
+
+        .show {
+          display: block;
+        }
+
+
+        .btn {
+            color: #FFF;
+            background: rgba(0,0,0,0);
+            padding: 10px 25px;
+            border: 3px solid #FFF;
+            display: inline-block;
+            transition: all 0.4s ease 0s;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            color: #ffffff !important;
+            background: #01ffae;
+            border-color: #01ffae !important;
+            transition: all 0.4s ease 0s;
+
+        }
+
+
+        .btn.active {
+            background-color: rgba(255,255,255,0.2);
+            border-color: #01ffae !important;
+            color: white;
+        }
+
+        h1{
+        font-size: 2.7em;
+        margin: 1vh 0;
+        color: white;
+        }
+
+        h2{
+            color: white;
+        }
+
+
+        a {
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #FFF;
+            font-size: 1.2em;
+            margin-left: 1.5vw;
+            margin-top: 2vh;
+        }
+
+        a:hover{
+            color: #01ffae;
+            transition: all 0.4s ease 0s;
+            cursor: pointer;
+        }
+
+        p {
+            color: white;
+        }
+
+
+    </style>
+    <title>About</title>
+</head>
+<body>
+    <div id = "Header">
+        <a onclick="window.location.href='index.html'">&#8592 HOME</a>
+        <a onclick="window.location.href='projects.html'">PROJECTS</a>
+    </div>
+    <div id="ProjectsHeader">
+        <h1>About me</h1>
+        <p> Here you will find all the projects that I've made during this four years of game development </p>
+        <p> Most of them are made as university projects </p>
+    </div>
+</body>
+</html>

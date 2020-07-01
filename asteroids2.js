@@ -391,8 +391,12 @@ var Ship = (function()
 	return {create:create};
 }());
 
-//canvas-asteroids.js ...........................................................
-
+function HideWindowStart(){
+	pause = false;
+	document.getElementById("Text").style.display = "none";
+	document.getElementById("Header").style.display = "block";
+	document.getElementById("tooltip").style.display = "block";
+}
 //common vars
 
 var canvas;
@@ -419,6 +423,8 @@ var contactors;
 var hScan;
 var asteroidVelFactor = 0;
 
+var pause = true;
+
 //keyboard vars
 
 var keySpace = false;
@@ -436,6 +442,7 @@ function(callback)
 
 window.onload = function()
 {
+
 	canvas = document.getElementById('canvas');
 	context = canvas.getContext('2d');
 
@@ -448,10 +455,11 @@ window.onload = function()
 
 
 	contactors = [];
-	var about = generateContactor(200, 600, "mai", "About me", "AboutMe");
+	var about = generateContactor(screenWidth /2 , 1000, "mai", "Section under development", "WIP");
 	about.rectH = 100;
+	about.rectW = 500;
 
-	generateContactor(200, 1200, "malitaIMG", "Malita SoW", "Malita");
+	// generateContactor(200, 1200, "malitaIMG", "Malita SoW", "Malita");
 
 	loop();
 };
@@ -524,7 +532,7 @@ function asteroidInit()
 
 function shipInit()
 {
-	ship = Ship.create(screenWidth >> 1, 500, this);
+	ship = Ship.create(screenWidth >> 1, 465, this);
 }
 
 function loop()
@@ -582,7 +590,7 @@ function updateShip()
 	if(keySpace) ship.shoot();
 
 
-	if(mousedown)
+	if(mousedown && !pause)
 	{
 		ship.thrust.setLength(0.1);
 		ship.thrust.setAngle(ship.angle);

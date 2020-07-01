@@ -14,6 +14,12 @@ function ShowModal(){
   OnFocus(true);
 }
 
+function ShowModal(id){
+  SetContent(id);
+  modal.style.display = "block";
+  OnFocus(true);
+}
+
 
 function SetContent(id){
 

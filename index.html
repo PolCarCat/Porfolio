@@ -1,47 +1,11 @@
 <html>
-
 <head>
-    <title>Pol Carrera Porfolio</title>
+    <link rel="stylesheet" href="asteroids.css">
     <style type="text/css">
-        html{
-            font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
-            overflow: hidden;
-        }
-        body{
-            height: 300vh;
-        }
 
-        #ProfilePic{
-            width: 10vw;
-            
-        }
 
-        #Header{
-            margin-top: 2vh;
-            margin-left: 5vw;
-            position: absolute;
-        }
-        .HeaderButton{
-
-            background-color: #555;
-            color: white;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 3vh 5vw;
-            font-size: 1vw;
-            font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
-
-        }
-
-        #Intro{
- 
-            position: absolute;
+        #Intro {
             color: #FFF;
-
-   
-            margin: 15vh 5vw 0;
             padding: 8px;
             background: rgba(1, 1, 1, 0.5);
 
@@ -50,17 +14,16 @@
             -khtml-user-select: none;
             -webkit-user-select: none;
             -o-user-select: none;
+            display: inline-block;
 
         }
 
         #info {
-            position: absolute;
             color: #FFF;
-
-   
-            margin: 30vh 5vw 0;
             padding: 8px;
             background: rgba(1, 1, 1, 0.5);
+            margin-top: 5vh;
+            display: inline-block;
 
             user-select: none;
             -moz-user-select: none;
@@ -70,80 +33,130 @@
 
         }
 
-
-        .HeaderButton:hover {
-            background-color: #777;
-
-        }
-        .ContactorIMG{
-          display: none;
-        }
         h1{
-            font-size: 2.5em;
+            font-size: 4em;
             margin: 1vh 0;
+            color: white;
         }
 
-
-        /* The Modal (background) */
-        .modal {
-          display: none; /* Hidden by default */
-          position: fixed; /* Stay in place */
-          z-index: 1; /* Sit on top */
-          left: 0;
-          top: 0;
-          width: 100%; /* Full width */
-          height: 100%; /* Full height */
-          overflow: auto; /* Enable scroll if needed */
-          background-color: rgb(0,0,0); /* Fallback color */
-          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        h2{
+            color: white;
+            font-size: 2em;
         }
 
-        /* Modal Content/Box */
-        .modal-content {
-          background-color: #fefefe;
-          margin: 15% auto; /* 15% from the top and centered */
-          padding: 20px;
-          border: 1px solid #888;
-          width: 80%; /* Could be more or less, depending on screen size */
+        h3{
+            font-size: 2em;
         }
 
-        /* The Close Button */
-        .close {
-          color: #aaa;
-          float: right;
-          font-size: 28px;
-          font-weight: bold;
+        .btntabs, .btnhide {
+            color: #FFF;
+            background: rgba(0,0,0,0);
+            padding: 15px;
+            border: 3px solid #FFF;
+            display: inline-block;
+            transition: all 0.4s ease 0s;
+            margin: 5vh 0.5vw;
+            font-size: 1.2em;
+            letter-spacing: 3px;
         }
 
-        .close:hover,
-        .close:focus {
-          color: black;
-          text-decoration: none;
-          cursor: pointer;
+        .btntabs:hover {
+            color: #ffffff !important;
+            background: #ff2701;
+            border-color: #ff2701 !important;
+            transition: all 0.4s ease 0s;
+        }
+
+        .btnhide {
+            border-radius: 50%;
+            width: 7vw;
+            height: 7vw;
+        }
+
+        .btnhide:hover {
+            color: #ffffff !important;
+            background: #01ffae;
+            border-color: #01ffae !important;
+            transition: all 0.4s ease 0s;
+        }
+
+        #Header{
+            padding-top: 20px;
+            padding-left: 20px;
+            top: 0;
+            left: 0;
+            display: none;
+            position: fixed;
+        }
+
+        #tooltip{
+            bottom: 0;
+            display: none;
+            position: fixed;
+
+            width: 100%; 
+            text-align: center; 
+            margin-bottom: 2vh;
+            color: white;
+
+            user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
+        }
+
+        a {
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #FFF;
+            font-size: 1.2em;
+            margin-left: 1.5vw;
+            margin-top: 2vh;
+        }
+
+        a:hover{
+            color: #01ffae;
+            transition: all 0.4s ease 0s;
+            cursor: pointer;
         }
 
     </style>
-    <link rel="stylesheet" href="asteroids.css">
+    <title>Pol Carrera Porfolio</title>
 </head>
 <body>
     <div id = "Header">
-        <button class = "HeaderButton">HOME</button>
-        <button class = "HeaderButton">PROJECTS</button>
-        <button class = "HeaderButton">ABOUT ME</button>
+        <a onclick="window.location.href='projects.html'">PROJECTS</a>
+        <a onclick="window.location.href='about.html'">ABOUT ME</a>
     </div>
-    <br>
-    <div id = Intro>
-        <h2> Hi I'm <h2>
-        <h1>Pol Carrera Catalina </h1>
-        <h3> And welcome to my  <span style="color: #FF5900">interactive porfolio!</span> </h3>
+    <div id ="Text" style="width: 100%; text-align: center; margin-top: 10vh;">
+        <div id = Intro>
+            <h2> Hi I'm </h2>
+            <h1>Pol Carrera Catalina </h1>
+            <h3>welcome to my  <span style="color: #FF5900">interactive porfolio!</span> </h3>
+        </div>
+        <div id="info">
+            <p>Since I want to work as a game deisnger I though that the best way to show my work is through a game.</p>
+            <br>
+            <p>Click on play to start my profolio game!</p>
+            <br>
+            <br>
+            <p>If you don't want to play just click the projects button</p>
+            <br>
+        </div>
+        <br>
+        <button class="btntabs" onclick="window.location.href='projects.html'"> PROJECTS</button>
+        <button class="btnhide" onclick="HideWindowStart()"> PLAY</button>
+        <button class="btntabs" onclick="window.location.href='about.html'"> ABOUT ME</button>
     </div>
-    <div id="info">
-        <p>Move arround and collide or shoot the green balls to show a project</p>
-        <br>
-        <p>If you don't want to play you can check my projects freely at the projects tab</p>
-        <br>
+
+    <div id="tooltip">
+        <div>
         <p>CLICK on the screen to MOVE</p>
         <p>Use [SPACE] to SHOOT</p>
+        <p>Game base from </p>
+        </div>
     </div>
     <div display="none">
         <img id = "malitaIMG" class = "ContactorIMG" src="data/Games/malita.png"/>
@@ -163,5 +176,4 @@
     <script type="text/javascript" src = "asteroids2.js"> </script>
 
 </body>
-
 </html>
