@@ -2,8 +2,7 @@
 "name":"Character sheet 1",
 "image":"https:\/\/cdn.enjin.io\/cloud-kovan\/images\/tokens\/CnkF1TrI6OZQIIlfR9A6BtbDzC9p905haEU0GRbc.png",
 "description":"Third edit metadata",
-
-"stats" : {
+"properties" : {
 	"health" : 100,
 	"damage" : 50
 }
