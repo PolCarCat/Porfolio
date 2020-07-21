@@ -3,14 +3,18 @@
     <style type="text/css">
 
         html{
-            font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
-            overflow: scroll;
-
+            font-family: 'Titillium Web', sans-serif;
+            overflow: hidden;
         }
 
         body {
             background: #262626;
-            margin-left: 10px;  
+            height: 100vh;
+
+            background-color: #222;
+            background-image: linear-gradient(transparent 50%, rgba(0,0,0) 50%);
+            background-size: 10px 10px;
+            margin: 0;
         }
 
         .divider {
@@ -22,8 +26,9 @@
 
         #Header{
             padding-top: 20px;
-            padding-left: 20px;
-
+            padding-left: 30px;
+            padding-bottom: 20px;
+            background-color: black;
         }
 
         #ProjectsHeader{
@@ -104,17 +109,24 @@
         }
 
         h1{
-        font-size: 2.7em;
-        margin: 1vh 0;
-        color: white;
+            font-size: 2.7em;
+            margin: 1vh 0;
+            color: white;
+            letter-spacing: 3px;
+            color: #FF5900;
         }
 
         h2{
+            color: #01ffae;
+        }
+
+        h3{
             color: white;
         }
 
 
         a {
+            font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
             text-align: center;
             font-weight: bold;
             letter-spacing: 3px;
@@ -132,8 +144,52 @@
 
         p {
             color: white;
+            line-height: 120%;
         }
 
+        .container{
+            display: inline-block;
+            width: 40vw;
+            height: 100%;
+            vertical-align: top;
+            padding: 2%;
+        }
+
+        #ImageSection{
+            text-align: center;
+        }
+
+        #TextSection{
+
+        }
+
+        #innerBody{
+            height: 90vh;
+        }
+
+        #ProfileImg{
+            height: 80%;
+
+        }
+
+        .btntabs {
+            color: #FFF;
+            background: rgba(0,0,0,0);
+            padding: 15px;
+            border: 3px solid #FFF;
+            display: inline-block;
+            transition: all 0.4s ease 0s;
+            margin: 5vh 0.5vw;
+            font-size: 1.2em;
+            letter-spacing: 3px;
+        }
+
+        .btntabs:hover {
+            color: #ffffff !important;
+            background: #01ffae;
+            border-color: #01ffae !important;
+            transition: all 0.4s ease 0s;
+        }
 
     </style>
     <title>About</title>
@@ -143,10 +199,34 @@
         <a onclick="window.location.href='index.html'">&#8592 HOME</a>
         <a onclick="window.location.href='projects.html'">PROJECTS</a>
     </div>
-    <div id="ProjectsHeader">
-        <h1>About me</h1>
-        <p> Here you will find all the projects that I've made during this four years of game development </p>
-        <p> Most of them are made as university projects </p>
+    <div id = "innerBody">
+            <div id = "TextSection" class = "container">
+                <h1>Pol Carrera Catalina</h1>
+                <p> Hi, my name is Pol Carrera Catalina and I’m 22 years old and I live in Barcelona. </p>
+                <p> I love video games and my ultimate goal is to work as a game designer and share all my ideas to everyone.<br> During the degree I mostly learnt about programming, a brach that also enjoy. I have experience with C++, C#, Html, JS, Phyton and also I have some projects made in Unity and Unreal engine.</p>
+                <p> I speak Catalan, Spanish and English. </p>
+
+                <h2> Experience </h2>
+                <p> I’m finishing 4th grade off the Bachelor's degree in Video Game design and development by the UPC at CITM. </p>
+                <p> I also did an internship at Smadex, a mobile advertiser company, where I worked as creative ad designer. There I did mobile ads with HTML, Javascript and CSS.  </p>
+
+                <h2> Other cool facts about me </h2>
+                <p> - I'm one of the creators of the Gran CITM game Jam. </p>
+                <p> - I have been volunteering in a Scout group in my childhood town for five years. </p>
+                <p> - I also have driving lisencie. </p>
+                <p> - I am black belt in judo. </p>
+                <p> - Video game enthusiast. </p>
+
+                <button class="btntabs" onclick="window.location.href='projects.html'"> Curriculum</button>
+            </div>
+            <div id = "ImageSection" class = "container">
+                <img id = "ProfileImg" src="data/profilePic.JPG">
+                <h3>polcarcat@gmail.com</h3>
+                <h3><a href="https://www.linkedin.com/in/pol-carrera-catalina-5b3722160/">LinkedIn</a></h3>
+                <br>
+            </div>
+    </div>
+
     </div>
 </body>
 </html>
