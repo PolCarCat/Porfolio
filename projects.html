@@ -57,7 +57,6 @@
           width: 33%;
           display: none; /* Hide columns by default */
           height: 500px;
-          margin-bottom: 50px;
           padding: 8px;
         }
 
@@ -72,7 +71,17 @@
         .content {
           background-color: white;
           padding: 10px;
-          height: 90%;
+          height: 100%;
+          text-align: center;
+        }
+
+        .imgContainer{
+          height: 60%;
+          width: 98%;
+          overflow: hidden;
+          display: inline-block;
+          text-align: center;
+          background-color: black;
         }
 
         .show {
@@ -144,7 +153,7 @@
     </div>
     <div id="ProjectsHeader">
         <h1>Projects</h1>
-        <p> Here you will find all the projects that I've made during this four years of game development </p>
+        <p> Here you will find some of the best projects that I've made during this four years of game development </p>
         <p> Most of them are made as university projects </p>
     </div>
     <div class="ProjectsDiv">
@@ -161,21 +170,27 @@
     <div class="row">
       <div class="column nature">
         <div class="content" onclick ="ShowModal('Malita')">
-          <img src="data/Games/malita.jpg" alt="Malita" style="width:100%">
+          <div class = "imgContainer">
+            <img src="data/Games/malita.jpg" alt="Malita" style="height:100%"> 
+          </div>
           <h4>Malita Soul of a warrior</h4>
           <p>Lead designer for the game Malita Soul of a Warrior. A 3D Beat’em Up based on Alita Battle Angel.</p>
         </div>
       </div>
       <div class="column nature">
         <div class="content">
-          <img src="data/Games/parallaxparadox.png" alt="Lights" style="width:100%">
+          <div class = "imgContainer">
+            <img src="data/Games/parallaxparadox.png" alt="Lights" style="height:100%">
+          </div>
           <h4>Parallax Paradox</h4>
           <p>Lorem ipsum dolor..</p>
         </div>
       </div>
       <div class="column nature">
         <div class="content">
-          <img src="data/Games/engine.gif" alt="Nature" style="width:100%">
+          <div class = "imgContainer">
+            <img src="data/Games/engine.gif" alt="Nature" style="height:100%">
+          </div>
           <h4>Mehgine</h4>
           <p>Lorem ipsum dolor..</p>
         </div>
@@ -183,44 +198,56 @@
 
       <div class="column cars">
         <div class="content">
-          <img src="/images/cars1.jpg" alt="Car" style="width:100%">
-          <h4>Retro</h4>
+          <div class = "imgContainer">
+            <img src="data/Games/Cerdos cunyaos.png" alt="Car" style="height:100%">
+          </div>
+          <h4>Los Cerdos Cunyaos</h4>
           <p>Lorem ipsum dolor..</p>
         </div>
       </div>
       <div class="column cars">
         <div class="content">
-          <img src="/images/cars2.jpg" alt="Car" style="width:100%">
-          <h4>Fast</h4>
+          <div class = "imgContainer">
+            <img src="data/Games/MystaraArena.png" alt="Car" style="height:100%">
+          </div>
+          <h4>Mystara Arena</h4>
           <p>Lorem ipsum dolor..</p>
         </div>
       </div>
       <div class="column cars">
         <div class="content">
-          <img src="/images/cars3.jpg" alt="Car" style="width:100%">
-          <h4>Classic</h4>
+          <div class = "imgContainer">
+            <img src="data/Games/MystaraArena.png" alt="Car" style="height:100%">
+          </div>
+          <h4>Infinity Racer</h4>
           <p>Lorem ipsum dolor..</p>
         </div>
       </div>
 
       <div class="column people">
         <div class="content">
-          <img src="/images/people1.jpg" alt="People" style="width:100%">
-          <h4>Girl</h4>
+          <div class = "imgContainer">
+            <img src="data/Games/TheSkyBlindSpire.png" alt="People" style="height:100%">
+          </div>
+          <h4>The Sky Blind Spyre</h4>
           <p>Lorem ipsum dolor..</p>
         </div>
       </div>
       <div class="column people">
         <div class="content">
-          <img src="/images/people2.jpg" alt="People" style="width:100%">
-          <h4>Man</h4>
+          <div class = "imgContainer">
+            <img src="data/Games/theHeist.png" alt="People" style="height:100%">
+          </div>
+          <h4>The Heist</h4>
           <p>Lorem ipsum dolor..</p>
         </div>
       </div>
       <div class="column people">
         <div class="content">
-          <img src="/images/people3.jpg" alt="People" style="width:100%">
-          <h4>Woman</h4>
+          <div class = "imgContainer">
+            <img src="data/Games/theNeShoot.png" alt="People" style="height:100%">
+          </div>
+          <h4>The NE-Shoot</h4>
           <p>Lorem ipsum dolor..</p>
         </div>
       </div>
