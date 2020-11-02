@@ -10,7 +10,7 @@
 
         body {
             background: #262626;
-            margin-left: 10px;  
+            margin: 0;
         }
 
         .divider {
@@ -22,8 +22,9 @@
 
         #Header{
             padding-top: 20px;
-            padding-left: 20px;
-
+            padding-left: 30px;
+            padding-bottom: 20px;
+            background-color: black;
         }
 
         #ProjectsHeader{
@@ -230,12 +231,14 @@
         </div>
       </div>
       <div class="column nature">
-        <div class="content">
+        <div class="content" onclick ="ShowModal('Parallax')">
+          <div class="overlay">
+                <h3>Parallax Paradox</h3>
+                <p>Best game ever</p>
+          </div>
           <div class = "imgContainer">
             <img src="data/Games/parallaxparadox.png" alt="Lights" style="height:100%">
           </div>
-          <h4>Parallax Paradox</h4>
-          <p>Lorem ipsum dolor..</p>
         </div>
       </div>
       <div class="column nature">
@@ -361,7 +364,7 @@
           modal.style.display = "block";
         }
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+        function HideModal() {
           modal.style.display = "none";
 
         }
