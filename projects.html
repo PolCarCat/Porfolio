@@ -54,9 +54,9 @@
         /* Create three equal columns that floats next to each other */
         .column {
           float: left;
-          width: 33%;
+          width: 25%;
           display: none; /* Hide columns by default */
-          height: 500px;
+          height: 300px;
           padding: 8px;
         }
 
@@ -69,19 +69,20 @@
 
         /* Content */
         .content {
+          position: relative;
           background-color: white;
-          padding: 10px;
+          padding: 5px;
           height: 100%;
           text-align: center;
         }
 
         .imgContainer{
-          height: 60%;
-          width: 98%;
+          height: 100%;
           overflow: hidden;
-          display: inline-block;
-          text-align: center;
-          background-color: black;
+
+            display: flex;
+            justify-content: center;
+            align-items: center; 
         }
 
         .show {
@@ -141,9 +142,58 @@
             cursor: pointer;
         }
 
+        .overlay {
+          position: absolute;
+          padding: 20% 5px 5px 5px;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 100%;
+          width: 100%;
+          opacity: 0;
+          transition: .5s ease;
+          background-color: #008CBA;
 
+        }
 
+        .content:hover .overlay {
+          opacity: 1;
+        }
+
+        /* The Modal (background) */
+        .modal {
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1; /* Sit on top */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+          background-color: #fefefe;
+          margin: 15% auto; /* 15% from the top and centered */
+          padding: 20px;
+          border: 1px solid #888;
+          width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        .modal h1{
+          color: black;
+        }
     </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
+    <script> 
+      $(function(){
+        $("#includedContent").load("data/modals.html"); 
+      });
+    </script> 
     <title>Projects</title>
 </head>
 <body>
@@ -170,11 +220,13 @@
     <div class="row">
       <div class="column nature">
         <div class="content" onclick ="ShowModal('Malita')">
+              <div class="overlay">
+                <h3>Malita Soul of a warrior</h3>
+                <p>Lead designer for the game Malita Soul of a Warrior. A 3D Beat’em Up based on Alita Battle Angel.</p>
+              </div>
           <div class = "imgContainer">
             <img src="data/Games/malita.jpg" alt="Malita" style="height:100%"> 
           </div>
-          <h4>Malita Soul of a warrior</h4>
-          <p>Lead designer for the game Malita Soul of a Warrior. A 3D Beat’em Up based on Alita Battle Angel.</p>
         </div>
       </div>
       <div class="column nature">
@@ -251,19 +303,8 @@
           <p>Lorem ipsum dolor..</p>
         </div>
       </div>
-    <!-- END GRID -->
     </div>
-    <div id="myModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h1 id = "modalTitle">Title</h1>
-        <p id = "modalDesc"> Paragraph </p>
-      </div>
-    </div>
-    <script type="text/javascript" src="data/modals.json"></script>
-    <script type="text/javascript" src = "modal.js"></script>
-
+    <div id="includedContent"></div>
     <script type="text/javascript">
         filterSelection("all") // Execute the function and show all columns
         function filterSelection(c) {
@@ -312,6 +353,13 @@
             this.className += " active";
           });
         }
+
+        function ShowModal(str){
+          var modal = document.getElementById(str);
+
+          modal.style.display = "block";
+        }
+
     </script>
 </body>
 </html>
