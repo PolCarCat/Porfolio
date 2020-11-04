@@ -8,12 +8,12 @@
 
         body {
             background: #262626;
-            height: 100vh;
 
             background-color: #222;
             background-image: linear-gradient(transparent 60%, rgba(0,0,0) 50%);
             background-size: 10px 10px;
             margin: 0;
+            height: 140vh;
         }
 
         .divider {
@@ -54,32 +54,7 @@
            width: 90%;
         }
 
-        /* Create three equal columns that floats next to each other */
-        .column {
-          float: left;
-          width: 33%;
-          display: none; /* Hide columns by default */
-          height: 300px;
-          margin-bottom: 50px;
-          padding: 8px;
-        }
 
-        /* Clear floats after rows */
-        .row:after {
-          content: "";
-          display: table;
-          clear: both;
-        }
-
-        /* Content */
-        .content {
-          background-color: white;
-          padding: 10px;
-        }
-
-        .show {
-          display: block;
-        }
 
 
         .btn {
@@ -161,9 +136,13 @@
 
         #TextSection{
             display: inline-block;
+            height: 100%;
+            overflow: hidden;
         }
 
         #innerBody{
+            display:block;
+            height: 90%;
             margin-top: 20px;
             margin-left: 10vw;
             width: 80vw;
@@ -171,7 +150,7 @@
         }
 
         #ProfileImg{
-            height: 90%;
+            height: 80%;
             display: inline-block;
 
         }
