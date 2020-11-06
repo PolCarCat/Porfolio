@@ -322,6 +322,41 @@ class Contactor
 	
 }
 
+class Rectangle 
+{
+	//exposed methods:
+	constructor(x, y, w, h, angle) {
+    	this.radius = 40;
+		this.color = '#dc143c';
+		this.pos = Vec2D.create(x, y);
+		this.sides = (Math.random() * 2 + 10) >> 0;
+		this.angle = angle;
+		this.rectW = w;
+		this.rectH = h;
+		this.collided = false;
+  	}
+}
+
+class Checkpoint 
+{
+	//exposed methods:
+	constructor(x, y) {
+    	this.radius = 40;
+		this.color = '#01ffae';
+		this.pos = Vec2D.create(x, y);
+		this.sides = (Math.random() * 2 + 10) >> 0;
+		this.angle = 0;
+		this.collided = false;
+		this.angleVel = (1 - Math.random() * 2) * 0.01;
+  	}
+
+  	update()
+	{
+		this.angle += this.angleVel;
+	}
+	
+}
+
 //ship.js ...........................................................
 
 var Ship = (function()
@@ -419,11 +454,15 @@ var asteroidPool;
 var asteroids;
 
 var contactors;
+var rectangles;
+var checkpoints;
+
 
 var hScan;
 var asteroidVelFactor = 0;
 
 var pause = true;
+var lastCheckpoint;
 
 //keyboard vars
 
@@ -446,20 +485,37 @@ window.onload = function()
 	canvas = document.getElementById('canvas');
 	context = canvas.getContext('2d');
 
+
 	window.onresize();
 	keyboardInit();
 	particleInit();
 	bulletInit();
 	asteroidInit();
+	lastCheckpoint = Vec2D.create(screenWidth >> 1, 480);
 	shipInit();
 
 
 	contactors = [];
-	var about = generateContactor(screenWidth /2 , 1000, "mai", "Section under development", "WIP");
+	rectangles = [];
+	checkpoints = [];
+
+
+	var about = generateContactor(screenWidth /2 , 2000, "mai", "Section under development", "WIP");
 	about.rectH = 100;
 	about.rectW = 500;
 
+	createRect(screenWidth /2 -1100, 0, 1000, 400, 0);
+	createRect(screenWidth /2 +100, 0, 1000, 400, 0);
+
+	createRect(screenWidth /2 -900, 500, 500, 1000, 0);
+	createRect(screenWidth /2 -800, 600, 500, 800, 0);
+	createRect(screenWidth /2 -700, 700, 500, 600, 0);
+
+	createRect(screenWidth /2 + 400, 500, 500, 1000, 0);
+	createRect(screenWidth /2 + 300, 600, 500, 800, 0);
+	createRect(screenWidth /2 + 200, 700, 500, 600, 0);
 	// generateContactor(200, 1200, "malitaIMG", "Malita SoW", "Malita");
+	createCheckpoint(screenWidth/2, 1500);
 
 	loop();
 };
@@ -532,7 +588,7 @@ function asteroidInit()
 
 function shipInit()
 {
-	ship = Ship.create(screenWidth >> 1, 465, this);
+	ship = Ship.create(lastCheckpoint.getX(), lastCheckpoint.getY(), this);
 }
 
 function loop()
@@ -541,6 +597,7 @@ function loop()
 	updateParticles();
 	updateBullets();
 	//updateAsteroids();
+	updateCheckpoints();
 
 	checkCollisions();
 
@@ -555,12 +612,26 @@ var mousedown = false;
 var focus = false;
 
 window.addEventListener("mousemove", function(e){
-	mouseX = e.clientX;
-	mouseY = e.clientY;
+    var rect = canvas.getBoundingClientRect();
+
+	mouseX = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
+	mouseY =  (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
+});
+
+window.addEventListener("change", function(e){
+    var rect = canvas.getBoundingClientRect();
+
+	mouseX = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
+	mouseY =  (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
 });
 
 window.addEventListener('mousedown', function(e) {
  	mousedown = true;
+
+ 	var rect = canvas.getBoundingClientRect();
+
+	mouseX = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
+	mouseY =  (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
 });
 
 window.addEventListener('mouseup', function(e) {
@@ -584,7 +655,7 @@ function updateShip()
 	if(ship.idle) return;
 
 
-	var angleRadians = Math.atan2((mouseY + window.pageYOffset) - ship.pos.getY(), mouseX - ship.pos.getX());
+	var angleRadians = Math.atan2((mouseY) - ship.pos.getY() , mouseX - ship.pos.getX());
 	ship.angle = angleRadians;
 
 	if(keySpace) ship.shoot();
@@ -596,8 +667,6 @@ function updateShip()
 		ship.thrust.setAngle(ship.angle);
 
 		generateThrustParticle();
-
-		window.scrollTo(0, ship.pos.getY() - (window.innerHeight/2));
 	}
 	else
 	{
@@ -611,7 +680,13 @@ function updateShip()
 	if(ship.pos.getY() > screenHeight) ship.pos.setY(0);
 	else if(ship.pos.getY() < 0) ship.pos.setY(screenHeight);
 
+	var yPos = lerp(window.scrollY, ship.pos.getY(), 1);
+	window.scrollTo(0, yPos - (window.innerHeight/2));
 
+}
+
+function lerp (start, end, amt){
+  return (1-amt)*start+amt*end
 }
 
 function generateThrustParticle()
@@ -720,6 +795,20 @@ function updateAsteroids()
 	}
 }
 
+function updateCheckpoints()
+{
+	var i = checkpoints.length - 1;
+
+	for(i; i > -1; --i)
+	{
+		var a = checkpoints[i];
+		a.update();
+
+	}
+
+
+}
+
 function generateAsteroid(x, y, radius, type)
 {
 	var a = asteroidPool.getElement();
@@ -753,11 +842,29 @@ function generateContactor(x, y, imgID, title, modalID)
 	return a;
 }
 
+function createRect(x,y,h,w, angle){
+	a = new Rectangle(x, y, h, w, angle);
+
+	rectangles.push(a);
+
+	return a;
+}
+
+function createCheckpoint(x,y){
+	a = new Checkpoint(x, y);
+
+	checkpoints.push(a);
+
+	return a;
+}
+
 function checkCollisions()
 {
 	checkBulletAsteroidCollisions();
 	checkShipAsteroidCollisions();
 	checkShipContactorCollisions();
+	checkShipRectsCollisions();
+	checkCheckpointsCollisions();
 }
 
 function checkBulletAsteroidCollisions()
@@ -839,6 +946,50 @@ function checkShipContactorCollisions()
 	}
 }
 
+function checkShipRectsCollisions()
+{
+	var i = rectangles.length - 1;
+
+	for(i; i > -1; --i)
+	{
+		var a = rectangles[i];
+		var s = ship;
+
+
+		if (checkSquareCollision(a.pos.getX(), a.pos.getY(), a.rectW, a.rectH, s.pos.getX(), s.pos.getY())){
+
+			if(s.idle) return;
+
+			s.idle = true;
+			s.vel.setXY(0, 0);
+
+			a.collided = true;
+
+			generateShipExplosion();
+		}
+
+	}
+}
+
+function checkCheckpointsCollisions()
+{
+	var i = checkpoints.length - 1;
+
+	for(i; i > -1; --i)
+	{
+		var a = checkpoints[i];
+		var s = ship;
+
+		if(checkDistanceCollision(a, s))
+		{
+
+			lastCheckpoint.setXY(a.pos.getX(), a.pos.getY());
+			generateAsteroidExplosion(a, a.color);
+		}
+	}
+}
+
+
 function generateShipExplosion()
 {
 	var i = 18;
@@ -857,6 +1008,7 @@ function generateShipExplosion()
 		p.vel.setLength(20 / p.radius);
 		p.vel.setAngle(ship.angle + (1 - Math.random() * 2) * doublePI);
 		p.pos.setXY(ship.pos.getX() + Math.cos(p.vel.getAngle()) * (ship.radius * 0.8), ship.pos.getY() + Math.sin(p.vel.getAngle()) * (ship.radius * 0.8));
+
 
 		//particles[particles.length] = p; same as: particles.push(p);
 
@@ -892,7 +1044,7 @@ function destroyAsteroid(asteroid)
 	resolveAsteroidType(asteroid);
 }
 
-function generateAsteroidExplosion(asteroid)
+function generateAsteroidExplosion(asteroid, color = '#FF5900')
 {
 	var i = 18;
 
@@ -906,7 +1058,7 @@ function generateAsteroidExplosion(asteroid)
 
 		p.radius = Math.random() * (asteroid.radius >> 2) + 2;
 		p.lifeSpan = 80;
-		p.color = '#FF5900';
+		p.color = color;
 		p.vel.setLength(20 / p.radius);
 		p.vel.setAngle(ship.angle + (1 - Math.random() * 2) * doublePI);
 		p.pos.setXY(asteroid.pos.getX() + Math.cos(p.vel.getAngle()) * (asteroid.radius * 0.8), asteroid.pos.getY() + Math.sin(p.vel.getAngle()) * (asteroid.radius * 0.8));
@@ -949,7 +1101,10 @@ function render()
 	renderBullets();
 	renderAsteroids();
 	renderContactors();
+	renderRects();
+	renderCheckpoints();
 	renderScanlines();
+
 }
 
 function renderShip()
@@ -1049,21 +1204,6 @@ function renderContactors()
 	{
 		var a = contactors[i];
 
-		// context.beginPath();
-		// context.lineWidth = (Math.random() > 0.1) ? 7 : 6;
-		// context.strokeStyle = a.color;
-
-		// var j = a.sides;
-		// context.moveTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
-		// for(j; j > -1; --j)
-		// {
-		// 	context.lineTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
-		// }
-
-		// if(Math.random() > 0.05) context.stroke();
-
-		// context.closePath();
-
 		var color;
 		if (a.collided) color = a.color; 
 		else color = '#FF5900';
@@ -1081,8 +1221,52 @@ function renderContactors()
 	}
 }
 
+function renderRects()
+{
+	//inverse for loop = more performance.
+
+	var i = rectangles.length - 1;
+
+	for(i; i > -1; --i)
+	{
+		var a = rectangles[i];
+
+		drawRectangle2(a.pos.getX(), a.pos.getY(), a.rectW, a.rectH, a.color, a.angle);
+
+	}
+}
+
+function renderCheckpoints(){
+	var i = checkpoints.length - 1;
+
+	for(i; i > -1; --i)
+	{
+		var a = checkpoints[i];
+
+		context.beginPath();
+		context.lineWidth = (Math.random() > 0.2) ? 4 : 3;
+		context.strokeStyle = a.color;
+
+
+		var j = a.sides;
+
+		context.moveTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
+
+		for(j; j > -1; --j)
+		{
+			context.lineTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
+			
+		}
+
+		if(Math.random() > 0.2) context.stroke();
+		
+		context.closePath();
+	}
+}
+
 function drawRectangle(x, y, w, h, imgID, color)
 {
+
 	context.strokeStyle = color;
 	//context.strokeRect(x - (w/2), y - (h/2), w, h);
 
@@ -1096,6 +1280,27 @@ function drawRectangle(x, y, w, h, imgID, color)
 
 
 	context.closePath();
+}
+
+function drawRectangle2(x,y,w,h, color, angle){
+
+
+	context.fillStyle = "#000";
+	context.lineWidth = 0;
+	context.globalAlpha = 0.1;
+
+    context.fillRect(x,y,w,h);
+    context.globalAlpha = 1.0;
+
+
+	context.strokeStyle = color;
+	context.lineWidth = (Math.random() > 0.2) ? 3 : 2;
+	context.beginPath();
+	context.rect(x,y,w,h);
+	context.stroke();
+
+
+
 }
 
 function drawRecnagleRounded (x, y, w, h, r) {
@@ -1164,8 +1369,8 @@ function generateShot()
 function resetGame()
 {
 	asteroidVelFactor = 0;
-
-	ship.pos.setXY(screenWidth >> 1, ship.pos.getY());
+	console.log(lastCheckpoint);
+	ship.pos.setXY(lastCheckpoint.getX(), lastCheckpoint.getY());
 	ship.vel.setXY(0, 0);
 
 	resetAsteroids();
