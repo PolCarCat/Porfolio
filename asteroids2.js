@@ -618,7 +618,7 @@ window.addEventListener("mousemove", function(e){
 	mouseY =  (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
 });
 
-window.addEventListener("change", function(e){
+window.addEventListener('scroll', function(e) {
     var rect = canvas.getBoundingClientRect();
 
 	mouseX = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
