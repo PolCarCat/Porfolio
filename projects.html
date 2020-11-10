@@ -4,13 +4,18 @@
     <style type="text/css">
 
         html{
-            font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
             overflow: scroll;
         }
 
         body {
-            background: #262626;
+
             margin: 0;
+            background: #262626;
+
+            background-color: #222;
+            background-image: linear-gradient(transparent 60%, rgba(0,0,0) 50%);
+            background-size: 10px 10px;
         }
 
         .divider {
@@ -28,14 +33,11 @@
         }
 
         #ProjectsHeader{
-            margin-top: 10vh;
-            margin-left: 1.5vw;
             color: white;
         }
 
         .ProjectsDiv{
             margin-top: 50px;
-            margin-left: 1.5vw;
         }
 
         * {
@@ -43,13 +45,13 @@
         }
 
         .row {
-          margin: 8px -16px;
+
         }
 
         /* Add padding BETWEEN each column (if you want) */
         .row {
            padding: 8px;
-           width: 90%;
+           width: 100%;
         }
 
         /* Create three equal columns that floats next to each other */
@@ -71,7 +73,7 @@
         /* Content */
         .content {
           position: relative;
-          background-color: white;
+          background-color: black;
           padding: 5px;
           height: 100%;
           text-align: center;
@@ -81,9 +83,9 @@
           height: 100%;
           overflow: hidden;
 
-            display: flex;
-            justify-content: center;
-            align-items: center; 
+          display: flex;
+          justify-content: center;
+          align-items: center; 
         }
 
         .show {
@@ -154,13 +156,27 @@
           width: 100%;
           opacity: 0;
           transition: .5s ease;
-          background-color: #008CBA;
+          background-color: rgba(255,255,255,0.7);
 
         }
 
         .content:hover .overlay {
           opacity: 1;
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
         }
+
+        #innerBody{
+            display:block;
+            height: 90%;
+            margin-top: 20px;
+            margin-left: 10vw;
+            width: 80vw;
+            background-color:  rgba(0,0,0,0.8);
+            padding: 1.5vh 1.5vw;
+        }
+
     </style>
     <link rel="stylesheet" href="modals.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
@@ -176,113 +192,114 @@
         <a onclick="window.location.href='index.html'">&#8592 HOME</a>
         <a onclick="window.location.href='about.html'">ABOUT ME</a>
     </div>
-    <div id="ProjectsHeader">
-        <h1>Projects</h1>
-        <p> Here you will find some of the best projects that I've made during this four years of game development </p>
-        <p> Most of them are made as university projects </p>
-    </div>
-    <div class="ProjectsDiv">
-    <div id="myBtnContainer">
-      <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-      <button class="btn" onclick="filterSelection('nature')"> Games from scratch</button>
-      <button class="btn" onclick="filterSelection('cars')"> Tools</button>
-      <button class="btn" onclick="filterSelection('people')"> Unity</button>
-      <button class="btn" onclick="filterSelection('people')"> Unreal</button>
-      <button class="btn" onclick="filterSelection('people')"> Game Jams</button>
-    </div>
+    <div id = "innerBody">
+      <div id="ProjectsHeader">
+          <h1>Projects</h1>
+          <p> Here you will find some of the best projects that I've made during this four years of game development </p>
+          <p> Most of them are made as university projects </p>
+      </div>
+      <div class="ProjectsDiv">
+      <div id="myBtnContainer">
+        <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+        <button class="btn" onclick="filterSelection('nature')"> Games from scratch</button>
+        <button class="btn" onclick="filterSelection('cars')"> Tools</button>
+        <button class="btn" onclick="filterSelection('people')"> Unity</button>
+        <button class="btn" onclick="filterSelection('people')"> Unreal</button>
+        <button class="btn" onclick="filterSelection('people')"> Game Jams</button>
+      </div>
+      <!-- Portfolio Gallery Grid -->
+      <div class="row">
+        <div class="column nature">
+          <div class="content" onclick ="ShowModal('Malita')">
+                <div class="overlay">
+                  <h3>Malita Soul of a warrior</h3>
+                  <p>Lead designer for the game Malita Soul of a Warrior. A 3D Beat’em Up based on Alita Battle Angel.</p>
+                </div>
+            <div class = "imgContainer">
+              <img src="data/Games/malita.jpg" alt="Malita" style="height:100%"> 
+            </div>
+          </div>
+        </div>
+        <div class="column nature">
+          <div class="content" onclick ="ShowModal('Parallax')">
+            <div class="overlay">
+                  <h3>Parallax Paradox</h3>
+                  <p>Best game ever</p>
+            </div>
+            <div class = "imgContainer">
+              <img src="data/Games/parallaxparadox.png" alt="Lights" style="height:100%">
+            </div>
+          </div>
+        </div>
+        <div class="column nature">
+          <div class="content">
+            <div class="overlay">
+                  <h3>Mehgine</h3>
+                  <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
+            </div>
+            <div class = "imgContainer">
+              <img src="data/Games/engine.gif" alt="Lights" style="height:100%">
+            </div>
+          </div>
+        </div>
 
-    <!-- Portfolio Gallery Grid -->
-    <div class="row">
-      <div class="column nature">
-        <div class="content" onclick ="ShowModal('Malita')">
-              <div class="overlay">
-                <h3>Malita Soul of a warrior</h3>
-                <p>Lead designer for the game Malita Soul of a Warrior. A 3D Beat’em Up based on Alita Battle Angel.</p>
-              </div>
-          <div class = "imgContainer">
-            <img src="data/Games/malita.jpg" alt="Malita" style="height:100%"> 
+        <div class="column cars">
+          <div class="content">
+            <div class="overlay">
+                  <h3>Los Cerdos Cunyaos</h3>
+                  <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
+            </div>
+            <div class = "imgContainer">
+              <img src="data/Games/Cerdos cunyaos.png" alt="Lights" style="height:100%">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="column nature">
-        <div class="content" onclick ="ShowModal('Parallax')">
-          <div class="overlay">
-                <h3>Parallax Paradox</h3>
-                <p>Best game ever</p>
-          </div>
-          <div class = "imgContainer">
-            <img src="data/Games/parallaxparadox.png" alt="Lights" style="height:100%">
-          </div>
-        </div>
-      </div>
-      <div class="column nature">
-        <div class="content">
-          <div class="overlay">
-                <h3>Mehgine</h3>
-                <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
-          </div>
-          <div class = "imgContainer">
-            <img src="data/Games/engine.gif" alt="Lights" style="height:100%">
-          </div>
-        </div>
-      </div>
 
-      <div class="column cars">
-        <div class="content">
-          <div class="overlay">
-                <h3>Los Cerdos Cunyaos</h3>
-                <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
-          </div>
-          <div class = "imgContainer">
-            <img src="data/Games/Cerdos cunyaos.png" alt="Lights" style="height:100%">
-          </div>
-        </div>
-      </div>
-
-      <div class="column cars">
-        <div class="content">
-          <div class="overlay">
-                <h3>Mystara Arena</h3>
-                <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
-          </div>
-          <div class = "imgContainer">
-            <img src="data/Games/MystaraArena.png" alt="Lights" style="height:100%">
+        <div class="column cars">
+          <div class="content">
+            <div class="overlay">
+                  <h3>Mystara Arena</h3>
+                  <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
+            </div>
+            <div class = "imgContainer">
+              <img src="data/Games/MystaraArena.png" alt="Lights" style="height:100%">
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="column cars">
-        <div class="content">
-          <div class="overlay">
-                <h3>The Skyblind Spire</h3>
-                <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
-          </div>
-          <div class = "imgContainer">
-            <img src="data/Games/TheSkyBlindSpire.png" alt="Lights" style="height:100%">
+        <div class="column cars">
+          <div class="content">
+            <div class="overlay">
+                  <h3>The Skyblind Spire</h3>
+                  <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
+            </div>
+            <div class = "imgContainer">
+              <img src="data/Games/TheSkyBlindSpire.png" alt="Lights" style="height:100%">
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="column cars">
-        <div class="content">
-          <div class="overlay">
-                <h3>The Heist</h3>
-                <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
-          </div>
-          <div class = "imgContainer">
-            <img src="data/Games/theHeist.png" alt="Lights" style="height:100%">
+        <div class="column cars">
+          <div class="content">
+            <div class="overlay">
+                  <h3>The Heist</h3>
+                  <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
+            </div>
+            <div class = "imgContainer">
+              <img src="data/Games/theHeist.png" alt="Lights" style="height:100%">
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="column cars">
-        <div class="content">
-          <div class="overlay">
-                <h3>The NE Shoot</h3>
-                <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
-          </div>
-          <div class = "imgContainer">
-            <img src="data/Games/theNeShoot.png" alt="Lights" style="height:100%">
+        <div class="column cars">
+          <div class="content">
+            <div class="overlay">
+                  <h3>The NE Shoot</h3>
+                  <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
+            </div>
+            <div class = "imgContainer">
+              <img src="data/Games/theNeShoot.png" alt="Lights" style="height:100%">
+            </div>
           </div>
         </div>
       </div>

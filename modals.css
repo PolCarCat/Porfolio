@@ -36,6 +36,12 @@
 
 .modal h1{
   color: black;
+  font-size: 2em;
+  margin: 5vh 0 3vh 0;
+}
+
+.modal p{
+
 }
 
 .modalVideo{
