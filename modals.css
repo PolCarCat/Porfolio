@@ -34,19 +34,26 @@
   vertical-align: top
 }
 
+.modalDesc{
+  height: 30%;
+}
+
 .modal h1{
   color: black;
   font-size: 2em;
   margin: 5vh 0 3vh 0;
+  transition: all 0.4s ease 0s;
+  letter-spacing: 1px;
 }
 
 .modal p{
-
+    transition: all 0.4s ease 0s;
 }
 
 .modalVideo{
   z-index: 10;
   width: 100%;
+  transition: all 0.4s ease 0s;
 }
 
 .close {
@@ -61,4 +68,22 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.btnmodal {
+    color: #000;
+    background: rgba(0,0,0,0);
+    padding: 15px;
+    border: 3px solid #000;
+    transition: all 0.4s ease 0s;
+    font-size: 1.2em;
+    letter-spacing: 3px;
+
+}
+
+.btnmodal:hover {
+    color: #000 !important;
+    background: #01ffae;
+    border-color: #01ffae !important;
+    transition: all 0.4s ease 0s;
 }

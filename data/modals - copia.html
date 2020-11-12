@@ -1,6 +1,5 @@
-    <link rel="stylesheet" href="modals.css">
-    
-    <div id="Malita" class="modal" style="display: block;">
+    <link rel="stylesheet" href="../modals.css">
+    <div id="Malita" class="modal">
       <div class="modal-content">
       	<div class="modal-video">
       		<div style = "width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
@@ -10,22 +9,32 @@
 	  	<div class="modal-text">
         	<span class="close">&times;</span>
         	<h1 id = "modalTitle">Malita Soul of a Warrior</h1>
-        	<p id = "modalDesc"> Lead designer for the game Malita Soulof a Warrior. A 3D Beat’em Up based on Alita: Battle Angel, made in our own engine. </p>
+        	<p class = "modalDesc"> Lead designer for the game Malita Soulof a Warrior. A 3D Beat’em Up based on Alita: Battle Angel, made in our own engine. </p>
+          <button class="btnmodal" onclick="window.location.href='https://typhoonstudio.itch.io/malita'"> Itch.io</button>
+          <button class="btnmodal" onclick="window.location.href='https://rustiktie.github.io/project-3-bcn/'"> Website</button>
     	</div>
       </div>
     </div>
 
-    <div id="Parallax" class="modal">
+    <div id="Parallax" class="modal" style="display: block;">
       <div class="modal-content">
-        <span class="close" onclick="HideModal()">&times;</span>
-        <h1 id = "modalTitle">Parallax Paradox</h1>
-        <p id = "modalDesc"> Parallax Paradox is a two 2D platformer where the player has to deal with a divided reality.   It was made with STL in C++ 
-        <br>
-        Winner best UPC game at 3HMA 6th edition
-        <br>
-        Nominated best game at 3HMA 6th edition
-        <br>
-        https://polcarcat.itch.io/parallax-paradox </p>
+        <div class="modal-video">
+          <div style = "width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <iframe src="https://www.youtube.com/embed/OhQcG3YqnlY" style="width:90%; height: 80%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="modal-text">
+            <span class="close">&times;</span>
+            <h1 id = "modalTitle">Parallax Paradox</h1>
+            <p class = "modalDesc"> Parallax Paradox is a two 2D platformer where the player has to deal with a divided reality.   It was made with STL in C++ 
+              <br><b style="text-align: center; margin-top: 5%;">
+              Winner best UPC game at 3HMA 6th edition
+              <br>
+              Nominated best game at 3HMA 6th edition
+              <br></b>
+            </p>
+          <button class="btnmodal" onclick="window.location.href='https://polcarcat.itch.io/parallax-paradox'"> Itch.io</button>
+        </div>
       </div>
     </div>
 
