@@ -357,6 +357,17 @@ class Checkpoint
 	
 }
 
+class Phrase 
+{
+	//exposed methods:
+	constructor(x, y, string) {
+    	this.radius = 40;
+		this.color = 'white';
+		this.pos = Vec2D.create(x, y);
+		this.string = string;
+		this.size = 20;
+  	}	
+}
 //ship.js ...........................................................
 
 var Ship = (function()
@@ -452,6 +463,7 @@ var bullets;
 
 var asteroidPool;
 var asteroids;
+var phrases;
 
 var contactors;
 var rectangles;
@@ -498,11 +510,12 @@ window.onload = function()
 	contactors = [];
 	rectangles = [];
 	checkpoints = [];
+	phrases = [];
 
 
-	var about = generateContactor(screenWidth /2 , 2000, "mai", "Section under development", "WIP");
+	var about = generateContactor(screenWidth /2 , 2000, "mai", "Hi", "Malita");
 	about.rectH = 100;
-	about.rectW = 500;
+	about.rectW = 100;
 
 	createRect(screenWidth /2 -1100, 0, 1000, 400, 0);
 	createRect(screenWidth /2 +100, 0, 1000, 400, 0);
@@ -516,6 +529,10 @@ window.onload = function()
 	createRect(screenWidth /2 + 200, 700, 500, 600, 0);
 	// generateContactor(200, 1200, "malitaIMG", "Malita SoW", "Malita");
 	createCheckpoint(screenWidth/2, 1500);
+
+	createPhrase(screenWidth /2, 1400, "Look a checkpoint!");
+	createPhrase(screenWidth /2 + 400, 2000, "Collide with orange sections");
+	createPhrase(screenWidth /2 + 400, 2050, "to show more information");
 
 	loop();
 };
@@ -615,7 +632,7 @@ window.addEventListener("mousemove", function(e){
     var rect = canvas.getBoundingClientRect();
 
 	mouseX = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
-	mouseY =  (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
+	mouseY =  ((e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height);
 });
 
 
@@ -853,6 +870,14 @@ function createCheckpoint(x,y){
 	return a;
 }
 
+function createPhrase(x,y,s){
+	a = new Phrase(x, y, s);
+
+	phrases.push(a);
+
+	return a;
+}
+
 function checkCollisions()
 {
 	checkBulletAsteroidCollisions();
@@ -934,8 +959,7 @@ function checkShipContactorCollisions()
 			a.collided = true;
 
 			generateShipExplosion();
-			SetContent(a.modalID);
-			ShowModal();
+			ShowModal(a.modalID);
 		}
 
 	}
@@ -1098,6 +1122,7 @@ function render()
 	renderContactors();
 	renderRects();
 	renderCheckpoints();
+	renderPhrases();
 	renderScanlines();
 
 }
@@ -1259,6 +1284,18 @@ function renderCheckpoints(){
 	}
 }
 
+function renderPhrases(){
+	var i = phrases.length - 1;
+
+	for(i; i > -1; --i)
+	{
+		var a = phrases[i];
+		context.fillStyle = a.color;
+		context.textAlign = "center";
+		context.fillText(a.string, a.pos.getX(), a.pos.getY());
+	}
+}
+
 function drawRectangle(x, y, w, h, imgID, color)
 {
 
@@ -1380,4 +1417,26 @@ function resetAsteroids()
 		var a = asteroids[i];
 		a.blacklisted = true;
 	}
+}
+
+
+var modal;
+function ShowModal(str){
+  modal = document.getElementById(str);
+
+  modal.style.display = "block";
+  OnFocus(true);
+}
+// When the user clicks on <span> (x), close the modal
+function HideModal() {
+  modal.style.display = "none";
+  OnFocus(false);
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+    OnFocus(false);
+  }
 }
