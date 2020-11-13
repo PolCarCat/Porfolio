@@ -450,7 +450,9 @@ var context;
 var screenWidth;
 var screenHeight;
 var doublePI = Math.PI * 2;
-
+var canvasRect;
+var canvasW;
+var canvasH;
 //game vars
 
 var ship;
@@ -503,7 +505,7 @@ window.onload = function()
 	particleInit();
 	bulletInit();
 	asteroidInit();
-	lastCheckpoint = Vec2D.create(screenWidth >> 1, 480);
+	lastCheckpoint = Vec2D.create(0, 480);
 	shipInit();
 
 
@@ -513,26 +515,28 @@ window.onload = function()
 	phrases = [];
 
 
-	var about = generateContactor(screenWidth /2 , 2000, "mai", "Hi", "Malita");
+	var about = generateContactor(0 , 2000, "mai", "Hi", "Malita");
 	about.rectH = 100;
 	about.rectW = 100;
 
-	createRect(screenWidth /2 -1100, 0, 1000, 400, 0);
-	createRect(screenWidth /2 +100, 0, 1000, 400, 0);
+	//createRect(-1100, 0, 1000, 400, 0);
+	//createRect(100, 0, 1000, 400, 0);
 
-	createRect(screenWidth /2 -900, 500, 500, 1000, 0);
-	createRect(screenWidth /2 -800, 600, 500, 800, 0);
-	createRect(screenWidth /2 -700, 700, 500, 600, 0);
+	//createRect(-400, 500, 500, 1000, 0);
+	//createRect(-300, 600, 500, 800, 0);
+	//createRect(-200, 700, 500, 600, 0);
 
-	createRect(screenWidth /2 + 400, 500, 500, 1000, 0);
-	createRect(screenWidth /2 + 300, 600, 500, 800, 0);
-	createRect(screenWidth /2 + 200, 700, 500, 600, 0);
+	//createRect(400, 500, 500, 1000, 0);
+	//createRect(300, 600, 500, 800, 0);
+	//createRect(200, 700, 500, 600, 0);
+
+	createRect(0, 0, 40, 10, 0);
 	// generateContactor(200, 1200, "malitaIMG", "Malita SoW", "Malita");
-	createCheckpoint(screenWidth/2, 1500);
+	createCheckpoint(0, 150);
 
-	createPhrase(screenWidth /2, 1400, "Look a checkpoint!");
-	createPhrase(screenWidth /2 + 400, 2000, "Collide with orange sections");
-	createPhrase(screenWidth /2 + 400, 2050, "to show more information");
+	createPhrase(0, 1400, "Look a checkpoint!");
+	createPhrase(400, 2000, "Collide with orange sections");
+	createPhrase(400, 2050, "to show more information");
 
 	loop();
 };
@@ -546,6 +550,9 @@ window.onresize = function()
 
 	canvas.width = screenWidth;
 	canvas.height = screenHeight;
+	canvasRect = canvas.getBoundingClientRect();
+	canvasW = screenWidth/100;
+	canvasH = screenHeight/100;
 
 	hScan = (screenHeight / 4) >> 0;
 };
@@ -627,23 +634,23 @@ var mouseX = 0;
 var mouseY = 0;
 var mousedown = false;
 var focus = false;
+var lastScroll = 0;
 
 window.addEventListener("mousemove", function(e){
     var rect = canvas.getBoundingClientRect();
 
 	mouseX = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
 	mouseY =  ((e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height);
+
+	lastScroll =window.scrollY;
+
+
 });
 
 
 
 window.addEventListener('mousedown', function(e) {
  	mousedown = true;
-
- 	var rect = canvas.getBoundingClientRect();
-
-	mouseX = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
-	mouseY =  (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
 });
 
 window.addEventListener('mouseup', function(e) {
@@ -667,7 +674,7 @@ function updateShip()
 	if(ship.idle) return;
 
 
-	var angleRadians = Math.atan2((mouseY) - ship.pos.getY() , mouseX - ship.pos.getX());
+	var angleRadians = Math.atan2(mouseY - ship.pos.getY() , mouseX - ship.pos.getX() - (canvasRect.width/2));
 	ship.angle = angleRadians;
 
 	if(keySpace) ship.shoot();
@@ -675,6 +682,12 @@ function updateShip()
 
 	if(mousedown && !pause)
 	{
+ 
+		if (lastScroll != window.scrollY){
+			mouseY += (window.scrollY - lastScroll);
+			lastScroll = window.scrollY;
+		}
+
 		ship.thrust.setLength(0.1);
 		ship.thrust.setAngle(ship.angle);
 
@@ -686,8 +699,8 @@ function updateShip()
 		ship.thrust.setLength(0);
 	}
 
-	if(ship.pos.getX() > screenWidth) ship.pos.setX(0);
-	else if(ship.pos.getX() < 0) ship.pos.setX(screenWidth);
+	if(ship.pos.getX() + (canvasRect.width/2)> screenWidth) ship.pos.setX(-(canvasRect.width/2));
+	else if(ship.pos.getX() +(canvasRect.width/2)< 0) ship.pos.setX((canvasRect.width/2));
 
 	if(ship.pos.getY() > screenHeight) ship.pos.setY(0);
 	else if(ship.pos.getY() < 0) ship.pos.setY(screenHeight);
@@ -975,7 +988,7 @@ function checkShipRectsCollisions()
 		var s = ship;
 
 
-		if (checkSquareCollision(a.pos.getX(), a.pos.getY(), a.rectW, a.rectH, s.pos.getX(), s.pos.getY())){
+		if (checkSquareCollision(a.pos.getX(), a.pos.getY(), a.rectW * canvasW, a.rectH * canvasH, s.pos.getX(), s.pos.getY())){
 
 			if(s.idle) return;
 
@@ -1132,7 +1145,7 @@ function renderShip()
 	if(ship.idle) return;
 
 	context.save();
-	context.translate(ship.pos.getX() >> 0, ship.pos.getY() >> 0);
+	context.translate((canvasRect.width/2) + ship.pos.getX() >> 0, ship.pos.getY() >> 0);
 	context.rotate(ship.angle);
 
 	context.strokeStyle = '#FFF';
@@ -1160,7 +1173,7 @@ function renderParticles()
 
 		context.beginPath();
 		context.strokeStyle = p.color;
-		context.arc(p.pos.getX() >> 0, p.pos.getY() >> 0, p.radius, 0, doublePI);
+		context.arc(p.pos.getX() + (canvasRect.width/2) >> 0, p.pos.getY() >> 0, p.radius, 0, doublePI);
 		if(Math.random() > 0.4) context.stroke();
 		context.closePath();
 	}
@@ -1251,7 +1264,8 @@ function renderRects()
 	{
 		var a = rectangles[i];
 
-		drawRectangle2(a.pos.getX(), a.pos.getY(), a.rectW, a.rectH, a.color, a.angle);
+		drawRectangle2((canvasRect.width/2) + a.pos.getX(),a.pos.getY(), a.rectW * canvasW, a.rectH * canvasH, a.color, a.angle);
+		console.log( a.pos.getX());
 
 	}
 }
@@ -1270,11 +1284,11 @@ function renderCheckpoints(){
 
 		var j = a.sides;
 
-		context.moveTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
+		context.moveTo(((canvasRect.width/2) + a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (canvasRect.width/2) + (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
 
 		for(j; j > -1; --j)
 		{
-			context.lineTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
+			context.lineTo((canvasRect.width/2) + (a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (canvasRect.width/2) + (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
 			
 		}
 
