@@ -657,6 +657,13 @@ window.addEventListener("touchmove", function(e){
 
 });
 
+window.addEventListener('touchstart', function(e) {
+ 	mousedown = true;
+});
+
+window.addEventListener('touchend', function(e) {
+ 	mousedown = false;
+});
 
 window.addEventListener('mousedown', function(e) {
  	mousedown = true;
