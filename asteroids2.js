@@ -515,9 +515,9 @@ window.onload = function()
 	phrases = [];
 
 
-	var about = generateContactor(0 , 2000, "mai", "Hi", "Malita");
-	about.rectH = 100;
-	about.rectW = 100;
+	var about = generateContactor(0 , 150, "mai", "Hi", "Malita");
+	about.rectH = 7;
+	about.rectW = 10;
 
 	//createRect(-1100, 0, 1000, 400, 0);
 	//createRect(100, 0, 1000, 400, 0);
@@ -530,13 +530,13 @@ window.onload = function()
 	//createRect(300, 600, 500, 800, 0);
 	//createRect(200, 700, 500, 600, 0);
 
-	createRect(0, 0, 40, 10, 0);
+	createRect(0, 750, 10, 10, 0);
 	// generateContactor(200, 1200, "malitaIMG", "Malita SoW", "Malita");
-	createCheckpoint(0, 150);
+	createCheckpoint(0, 350);
 
-	createPhrase(0, 1400, "Look a checkpoint!");
-	createPhrase(400, 2000, "Collide with orange sections");
-	createPhrase(400, 2050, "to show more information");
+	createPhrase(0, 450, "Look a checkpoint!");
+	createPhrase(100, 500, "Collide with orange sections");
+	createPhrase(100, 550, "to show more information");
 
 	loop();
 };
@@ -647,6 +647,15 @@ window.addEventListener("mousemove", function(e){
 
 });
 
+window.addEventListener("touchmove", function(e){
+    var rect = canvas.getBoundingClientRect();
+
+	mouseX = (e.touches[0].clientX - rect.left) / (rect.right - rect.left) * canvas.width;
+	mouseY =  ((event.touches[0].clientY - rect.top) / (rect.bottom - rect.top) * canvas.height);
+
+	lastScroll =window.scrollY;
+
+});
 
 
 window.addEventListener('mousedown', function(e) {
@@ -954,15 +963,10 @@ function checkShipContactorCollisions()
 		var a = contactors[i];
 		var s = ship;
 
-		if(checkDistanceCollision(a, s))
-		{
-			generateAsteroidExplosion(a);
-		}
+		var x = a.pos.getX() - (canvasW * (a.rectW / 2)) - a.rectOffsetX;
+		var y = a.pos.getY() - (canvasH * (a.rectH/2)) - a.rectOffsetY;
 
-		var x = a.pos.getX() - (a.rectW / 2) - a.rectOffsetX;
-		var y = a.pos.getY() - (a.rectH/2) - a.rectOffsetY;
-
-		if (checkSquareCollision(x, y, a.rectW, a.rectH, s.pos.getX(), s.pos.getY())){
+		if (checkSquareCollision(x, y, a.rectW * canvasW, a.rectH * canvasH, s.pos.getX(), s.pos.getY())){
 
 			if(s.idle) return;
 
@@ -970,6 +974,7 @@ function checkShipContactorCollisions()
 			s.vel.setXY(0, 0);
 
 			a.collided = true;
+			generateAsteroidExplosion(a);
 
 			generateShipExplosion();
 			ShowModal(a.modalID);
@@ -987,8 +992,10 @@ function checkShipRectsCollisions()
 		var a = rectangles[i];
 		var s = ship;
 
+		var x = a.pos.getX() - (canvasW * (a.rectW / 2));
+		var y = a.pos.getY() - (canvasH * (a.rectH/2));
 
-		if (checkSquareCollision(a.pos.getX(), a.pos.getY(), a.rectW * canvasW, a.rectH * canvasH, s.pos.getX(), s.pos.getY())){
+		if (checkSquareCollision(x, y, a.rectW * canvasW, a.rectH * canvasH, s.pos.getX(), s.pos.getY())){
 
 			if(s.idle) return;
 
@@ -1241,16 +1248,16 @@ function renderContactors()
 		if (a.collided) color = a.color; 
 		else color = '#FF5900';
 
-		drawRectangle(a.pos.getX() - a.rectOffsetX, a.pos.getY() - a.rectOffsetY, a.rectW, a.rectH, a.imgID, color);
+		drawRectangle((canvasRect.width/2) + a.pos.getX() - a.rectOffsetX, a.pos.getY() - a.rectOffsetY, a.rectW * canvasW, a.rectH * canvasH, a.imgID, color);
 
 		context.font = "30px monospace";
 		context.fillStyle = "white";
 		context.textAlign = "center";
 
 		if (document.getElementById(a.imgID))
-			context.fillText(a.title,a.pos.getX() - (a.rectOffsetX/2), a.pos.getY() - (a.rectOffsetY/2));
+			context.fillText(a.title, (canvasRect.width/2) + a.pos.getX() - (a.rectOffsetX/2), a.pos.getY() - (a.rectOffsetY/2));
 		else 
-			context.fillText(a.title,a.pos.getX() - a.rectOffsetX, a.pos.getY() - a.rectOffsetY);
+			context.fillText(a.title, (canvasRect.width/2) + a.pos.getX() - a.rectOffsetX, a.pos.getY() - a.rectOffsetY);
 	}
 }
 
@@ -1264,7 +1271,7 @@ function renderRects()
 	{
 		var a = rectangles[i];
 
-		drawRectangle2((canvasRect.width/2) + a.pos.getX(),a.pos.getY(), a.rectW * canvasW, a.rectH * canvasH, a.color, a.angle);
+		drawRectangle2((canvasRect.width/2) + a.pos.getX() - (canvasW * a.rectW/2) ,a.pos.getY() - (canvasH * a.rectH/2), a.rectW * canvasW, a.rectH * canvasH, a.color, a.angle);
 		console.log( a.pos.getX());
 
 	}
@@ -1284,11 +1291,11 @@ function renderCheckpoints(){
 
 		var j = a.sides;
 
-		context.moveTo(((canvasRect.width/2) + a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (canvasRect.width/2) + (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
+		context.moveTo(((canvasRect.width/2) + a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
 
 		for(j; j > -1; --j)
 		{
-			context.lineTo((canvasRect.width/2) + (a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (canvasRect.width/2) + (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
+			context.lineTo((canvasRect.width/2) + (a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
 			
 		}
 
@@ -1306,7 +1313,7 @@ function renderPhrases(){
 		var a = phrases[i];
 		context.fillStyle = a.color;
 		context.textAlign = "center";
-		context.fillText(a.string, a.pos.getX(), a.pos.getY());
+		context.fillText(a.string, (canvasRect.width/2) + a.pos.getX(), a.pos.getY());
 	}
 }
 
