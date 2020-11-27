@@ -519,24 +519,25 @@ window.onload = function()
 	about.rectH = 7;
 	about.rectW = 10;
 
-	//createRect(-1100, 0, 1000, 400, 0);
-	//createRect(100, 0, 1000, 400, 0);
+	createRect(-380, 0, 50, 40, 0);
+	createRect(380, 0, 50, 40, 0);
 
-	//createRect(-400, 500, 500, 1000, 0);
-	//createRect(-300, 600, 500, 800, 0);
-	//createRect(-200, 700, 500, 600, 0);
+	createRect(-500, 900, 35, 50, 0);
+	createRect(-400, 900, 35, 40, 0);
+	createRect(-300, 900, 35, 30, 0);
 
-	//createRect(400, 500, 500, 1000, 0);
-	//createRect(300, 600, 500, 800, 0);
-	//createRect(200, 700, 500, 600, 0);
+	createRect(500, 900, 35, 50, 0);
+	createRect(400, 900, 35, 40, 0);
+	createRect(300, 900, 35, 30, 0);
 
-	createRect(0, 750, 10, 10, 0);
+
+	//createRect(0, 750, 10, 10, 0);
 	// generateContactor(200, 1200, "malitaIMG", "Malita SoW", "Malita");
-	createCheckpoint(0, 350);
+	createCheckpoint(0, 1500);
 
-	createPhrase(0, 450, "Look a checkpoint!");
-	createPhrase(100, 500, "Collide with orange sections");
-	createPhrase(100, 550, "to show more information");
+	createPhrase(0, 1400, "Look a checkpoint!");
+	createPhrase(500, 1200, "Collide with orange sections");
+	createPhrase(500, 1250, "to show more information");
 
 	loop();
 };
@@ -552,7 +553,7 @@ window.onresize = function()
 	canvas.height = screenHeight;
 	canvasRect = canvas.getBoundingClientRect();
 	canvasW = screenWidth/100;
-	canvasH = screenHeight/100;
+	canvasH = screenWidth/100;
 
 	hScan = (screenHeight / 4) >> 0;
 };
@@ -721,8 +722,10 @@ function updateShip()
 	if(ship.pos.getY() > screenHeight) ship.pos.setY(0);
 	else if(ship.pos.getY() < 0) ship.pos.setY(screenHeight);
 
-	var yPos = lerp(window.scrollY, ship.pos.getY(), 1);
-	window.scrollTo(0, yPos - (window.innerHeight/2));
+	if (!pause){
+		var yPos = lerp(window.scrollY + (window.innerHeight/2), ship.pos.getY(), 0.2);
+		window.scrollTo(0, yPos - (window.innerHeight/2));
+	}
 
 }
 
@@ -1150,7 +1153,7 @@ function render()
 	renderRects();
 	renderCheckpoints();
 	renderPhrases();
-	renderScanlines();
+	//renderScanlines();
 
 }
 
@@ -1279,7 +1282,6 @@ function renderRects()
 		var a = rectangles[i];
 
 		drawRectangle2((canvasRect.width/2) + a.pos.getX() - (canvasW * a.rectW/2) ,a.pos.getY() - (canvasH * a.rectH/2), a.rectW * canvasW, a.rectH * canvasH, a.color, a.angle);
-		console.log( a.pos.getX());
 
 	}
 }
