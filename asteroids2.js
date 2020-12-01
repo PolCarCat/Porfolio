@@ -442,6 +442,20 @@ function HideWindowStart(){
 	document.getElementById("Text").style.display = "none";
 	document.getElementById("Header").style.display = "block";
 	document.getElementById("tooltip").style.display = "block";
+	fade(document.getElementById("TextContainer"));
+}
+
+function fade(element) {
+    var op = 1;  // initial opacity
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            clearInterval(timer);
+            element.style.display = 'none';
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 50);
 }
 //common vars
 
@@ -493,6 +507,7 @@ function(callback)
 	window.setTimeout(callback, 16.6);
 };
 
+var hieghtProportion = 10;
 window.onload = function()
 {
 
@@ -519,25 +534,29 @@ window.onload = function()
 	about.rectH = 7;
 	about.rectW = 10;
 
-	createRect(-380, 0, 50, 40, 0);
-	createRect(380, 0, 50, 40, 0);
+	// createRect(-380, 0, 50, 40, 0);
+	// createRect(380, 0, 50, 40, 0);
 
-	createRect(-500, 900, 35, 50, 0);
-	createRect(-400, 900, 35, 40, 0);
-	createRect(-300, 900, 35, 30, 0);
+	// createRect(-500, 900, 35, 50, 0);
+	// createRect(-400, 900, 35, 40, 0);
+	// createRect(-300, 900, 35, 30, 0);
 
-	createRect(500, 900, 35, 50, 0);
-	createRect(400, 900, 35, 40, 0);
-	createRect(300, 900, 35, 30, 0);
+	// createRect(500, 900, 35, 50, 0);
+	// createRect(400, 900, 35, 40, 0);
+	// createRect(300, 900, 35, 30, 0);
 
 
-	//createRect(0, 750, 10, 10, 0);
-	// generateContactor(200, 1200, "malitaIMG", "Malita SoW", "Malita");
-	createCheckpoint(0, 1500);
 
-	createPhrase(0, 1400, "Look a checkpoint!");
-	createPhrase(500, 1200, "Collide with orange sections");
-	createPhrase(500, 1250, "to show more information");
+
+	// createCheckpoint(0, 1500);
+
+	// createPhrase(0, 1400, "Look a checkpoint!");
+	// createPhrase(500, 1200, "Collide with orange sections");
+	// createPhrase(500, 1250, "to show more information");
+
+	createRect(20, 750, 10, 10, 0);
+	createRect(-20, 750, 10, 10, 0);
+
 
 	loop();
 };
@@ -547,7 +566,7 @@ window.onresize = function()
 	if(!canvas) return;
 
 	screenWidth = canvas.clientWidth;
-	screenHeight = canvas.clientHeight;
+	screenHeight = canvas.clientWidth * hieghtProportion;
 
 	canvas.width = screenWidth;
 	canvas.height = screenHeight;
@@ -1281,7 +1300,7 @@ function renderRects()
 	{
 		var a = rectangles[i];
 
-		drawRectangle2((canvasRect.width/2) + a.pos.getX() - (canvasW * a.rectW/2) ,a.pos.getY() - (canvasH * a.rectH/2), a.rectW * canvasW, a.rectH * canvasH, a.color, a.angle);
+		drawRectangle2( (canvasRect.width/2) + (canvasW *a.pos.getX()) - (canvasW * a.rectW/2) ,a.pos.getY() - (canvasH * a.rectH/2), a.rectW * canvasW, a.rectH * canvasH, a.color, a.angle);
 
 	}
 }

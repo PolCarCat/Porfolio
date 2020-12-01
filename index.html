@@ -1,16 +1,40 @@
 <html>
 <head>
-    <link rel="stylesheet" href="asteroids.css">
     <link rel="stylesheet" href="modals.css">
     <style type="text/css">
 
+          html{
+                font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+                overflow: scroll;
+          }
+
         body{
             background-color: black;
+            height: 100vh;
         }
+
+
+          * {
+            margin: 0;
+          }
+
+          canvas {
+
+            width: 80%;
+            position: absolute;
+            top: 2.5%;
+            left: 10%;
+            background: #262626;
+            z-index: -1;
+            border: 2px solid #FF5900;
+          }
+
         #Intro {
             color: #FFF;
             padding: 8px;
             background: rgba(1, 1, 1, 0.5);
+
+
 
             user-select: none;
             -moz-user-select: none;
@@ -27,6 +51,7 @@
             background: rgba(1, 1, 1, 0.5);
             margin-top: 5vh;
             display: inline-block;
+            border: 2px solid white;
 
             user-select: none;
             -moz-user-select: none;
@@ -53,10 +78,6 @@
 
         #ButtonsContainer{
             margin: 5vh 0.5vw;
-            position: absolute;
-            bottom: 0;  
-            left: 50%;
-            transform: translateX(-50%);
         }
         .btntabs, .btnhide {
             color: #FFF;
@@ -115,15 +136,12 @@
             -o-user-select: none;
         }
 
-        #CanvasConainer{
+        #TextContainer{
+            background-color: rgba(0,0,0,0.7);
             width: 100%;
             height: 500vh;
-            position: absolute;
             top: 0;
-            left: 0;
-            overflow: hidden;
-            z-index: -1;
-
+            position:  absolute;
         }
 
         a {
@@ -156,30 +174,30 @@
         <a onclick="window.location.href='projects.html'">PROJECTS</a>
         <a onclick="window.location.href='about.html'">ABOUT ME</a>
     </div>
-    <div id="CanvasConainer">
-        <canvas id="canvas"></canvas>
-    </div>
-    <div id ="Text" style="width: 100%; text-align: center; margin-top: 10vh;">
-        <div id = Intro>
-            <h2> Hi I'm </h2>
-            <h1>Pol Carrera Catalina </h1>
-            <h3>welcome to my  <span style="color: #FF5900">interactive porfolio!</span> </h3>
-        </div>
-        <br>
-        <div id="info">
-            <p>Since I want to work as a game deisgner I though that the best way to show my work is through a game.</p>
+    <canvas id="canvas"></canvas>
+    <div id = "TextContainer">
+        <div id ="Text" style="width: 100%; text-align: center; margin-top: 10vh;">
+            <div id = Intro>
+                <h2> Hi I'm </h2>
+                <h1>Pol Carrera Catalina </h1>
+                <h3>welcome to my  <span style="color: #FF5900">interactive porfolio!</span> </h3>
+            </div>
             <br>
-            <p>Click on play to start my profolio game!</p>
+            <div id="info">
+                <p>Since I want to work as a game deisgner I though that the best way to show my work is through a game.</p>
+                <br>
+                <p>Click on play to start my profolio game!</p>
+                <br>
+                <br>
+                <p>If you don't want to play just click the projects or about buttons</p>
+                <br>
+            </div>
             <br>
-            <br>
-            <p>If you don't want to play just click the projects button</p>
-            <br>
-        </div>
-        <br>
-        <div id="ButtonsContainer">
-            <button class="btntabs" onclick="window.location.href='projects.html'"> PROJECTS</button>
-            <button class="btnhide" onclick="HideWindowStart()"> PLAY</button>
-            <button class="btntabs" onclick="window.location.href='about.html'"> ABOUT ME</button>
+            <div id="ButtonsContainer">
+                <button class="btntabs" onclick="window.location.href='projects.html'"> PROJECTS</button>
+                <button class="btnhide" onclick="HideWindowStart()"> PLAY</button>
+                <button class="btntabs" onclick="window.location.href='about.html'"> ABOUT ME</button>
+            </div>
         </div>
     </div>
 
@@ -189,9 +207,6 @@
         <p>Use [SPACE] to SHOOT</p>
         <p>Game base from </p>
         </div>
-    </div>
-    <div display="none">
-        <img id = "malitaIMG" class = "ContactorIMG" src="data/Games/malita.png"/>
     </div>
     <div id="includedContent"></div>
     <script type="text/javascript" src = "asteroids2.js"> </script>
