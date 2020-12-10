@@ -530,32 +530,31 @@ window.onload = function()
 	phrases = [];
 
 
-	var about = generateContactor(0 , 150, "mai", "Hi", "Malita");
+	var about = generateContactor(0 , 150, "mai", "Hi", "Jams");
 	about.rectH = 7;
 	about.rectW = 10;
 
-	// createRect(-380, 0, 50, 40, 0);
-	// createRect(380, 0, 50, 40, 0);
+	createRect(-250, 0, 50, 100, 0);
+	createRect(250, 0, 50, 100, 0);
 
-	// createRect(-500, 900, 35, 50, 0);
-	// createRect(-400, 900, 35, 40, 0);
-	// createRect(-300, 900, 35, 30, 0);
+	createRect(-460, 900, 50, 100, 0);
+	createRect(-360, 900, 50, 75, 0);
+	createRect(-250, 900, 50, 50, 0);
 
-	// createRect(500, 900, 35, 50, 0);
-	// createRect(400, 900, 35, 40, 0);
-	// createRect(300, 900, 35, 30, 0);
-
-
+	createRect(460, 900, 50, 100, 0);
+	createRect(360, 900, 50, 75, 0);
+	createRect(250, 900, 50, 50, 0);
 
 
-	// createCheckpoint(0, 1500);
 
-	// createPhrase(0, 1400, "Look a checkpoint!");
-	// createPhrase(500, 1200, "Collide with orange sections");
-	// createPhrase(500, 1250, "to show more information");
 
-	createRect(20, 750, 10, 10, 0);
-	createRect(-20, 750, 10, 10, 0);
+	createCheckpoint(0, 1300);
+	createPhrase(0, 1200, "Look a checkpoint!");
+
+	createPhrase(200, 1500, "Collide with orange sections");
+	createPhrase(200, 1550, "to show more information");
+
+	context.font = "20px monospace";
 
 
 	loop();
@@ -1172,7 +1171,7 @@ function render()
 	renderRects();
 	renderCheckpoints();
 	renderPhrases();
-	//renderScanlines();
+	renderScanlines();
 
 }
 
@@ -1279,7 +1278,7 @@ function renderContactors()
 
 		drawRectangle((canvasRect.width/2) + a.pos.getX() - a.rectOffsetX, a.pos.getY() - a.rectOffsetY, a.rectW * canvasW, a.rectH * canvasH, a.imgID, color);
 
-		context.font = "30px monospace";
+
 		context.fillStyle = "white";
 		context.textAlign = "center";
 
@@ -1300,7 +1299,7 @@ function renderRects()
 	{
 		var a = rectangles[i];
 
-		drawRectangle2( (canvasRect.width/2) + (canvasW *a.pos.getX()) - (canvasW * a.rectW/2) ,a.pos.getY() - (canvasH * a.rectH/2), a.rectW * canvasW, a.rectH * canvasH, a.color, a.angle);
+		drawRectangle2( (canvasRect.width/2) + (a.pos.getX()) - (canvasW * a.rectW/2) ,(a.pos.getY()) - (canvasH * a.rectH/2), a.rectW * canvasW, a.rectH * canvasH, a.color, a.angle);
 
 	}
 }
