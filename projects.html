@@ -171,7 +171,6 @@
 
         #innerBody{
             display:block;
-            height: 90%;
             margin-top: 20px;
             margin-left: 10vw;
             width: 80vw;
@@ -243,6 +242,30 @@
           </div>
         </div>
 
+         <div class="column unity">
+          <div class="content" onclick ="ShowModal('Pepa')">
+            <div class="overlay">
+                  <h3>Pepa and the cookie Bandit</h3>
+                  <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
+            </div>
+            <div class = "imgContainer">
+              <img src="data/Games/pepa.png" alt="Lights" style="height:100%">
+            </div>
+          </div>
+        </div>
+
+      <div class="column unity">
+        <div class="content" onclick ="ShowModal('Nana')">
+          <div class="overlay">
+              <h3>Nana's Last Gambit</h3>
+              <p>Submission for the Mix and Game Jam 2020.</p>
+          </div>
+          <div class = "imgContainer">
+            <img src="data/Games/Nana's Last Gambit.png" alt="Lights" style="height:100%">
+          </div>
+        </div>
+      </div>
+
         <div class="column scratch">
           <div class="content" onclick ="ShowModal('Mystara')">
             <div class="overlay">
@@ -291,17 +314,7 @@
           </div>
         </div>
 
-         <div class="column unity">
-          <div class="content" onclick ="ShowModal('Pepa')">
-            <div class="overlay">
-                  <h3>Pepa and the cookie Bandit</h3>
-                  <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
-            </div>
-            <div class = "imgContainer">
-              <img src="data/Games/pepa.png" alt="Lights" style="height:100%">
-            </div>
-          </div>
-        </div>
+
 
       <div class="column scratch">
         <div class="content"onclick ="ShowModal('Commando')">
@@ -314,18 +327,6 @@
           </div>
         </div>
         </div>
-
-      <div class="column unity">
-        <div class="content" onclick ="ShowModal('Nana')">
-          <div class="overlay">
-              <h3>Nana's Last Gambit</h3>
-              <p>Submission for the Mix and Game Jam 2020.</p>
-          </div>
-          <div class = "imgContainer">
-            <img src="data/Games/Nana's Last Gambit.png" alt="Lights" style="height:100%">
-          </div>
-        </div>
-      </div>
 
       <div class="column others">
         <div class="content" onclick ="ShowModal('Website')">
@@ -407,6 +408,12 @@
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
           if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+
+        CloseModal(){
+          if (modal != null){
             modal.style.display = "none";
           }
         }
