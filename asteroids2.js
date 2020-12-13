@@ -1171,7 +1171,7 @@ function render()
 	renderRects();
 	renderCheckpoints();
 	renderPhrases();
-	renderScanlines();
+	//renderScanlines();
 
 }
 
