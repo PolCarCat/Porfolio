@@ -530,10 +530,6 @@ window.onload = function()
 	phrases = [];
 
 
-	var about = generateContactor(0 , 150, "mai", "Hi", "Jams");
-	about.rectH = 7;
-	about.rectW = 10;
-
 	createRect(-250, 0, 50, 100, 0);
 	createRect(250, 0, 50, 100, 0);
 
@@ -545,16 +541,40 @@ window.onload = function()
 	createRect(360, 900, 50, 75, 0);
 	createRect(250, 900, 50, 50, 0);
 
+	createRect(250, 1440, 70, 7, 0);
+	createRect(10, 1550, 7, 20, 0);
 
+
+	createRect(250, 1740, 70, 7, 0);
+	createRect(-250, 2000, 70, 7, 0);
+	createRect(250, 2150, 70, 7, 0);
+
+
+	createRect(250, 2350, 10, 10, 0);
 
 
 	createCheckpoint(0, 1300);
 	createPhrase(0, 1200, "Look a checkpoint!");
 
-	createPhrase(200, 1500, "Collide with orange sections");
-	createPhrase(200, 1550, "to show more information");
+	createPhrase(200, 1500, "Collide with orange rects");
+	createPhrase(200, 1530, "to show more information");
+
+
+	var about = generateContactor(200 , 1600, "mai", "Intro", "IntroModal");
+	about.rectH = 10;
+	about.rectW = 10 * canvasH/canvasW;
+
+
+	var second = generateContactor(200 , 2200, "mai", "Parallax", "Parallax");
+	second.rectH = 10;
+	second.rectW = 10 * canvasH/canvasW;
+
+	var third = generateContactor(200 , 2600, "mai", "GCGM", "Jams");
+	third.rectH = 10;
+	third.rectW = 10 * canvasH/canvasW;
 
 	context.font = "20px monospace";
+
 
 
 	loop();
