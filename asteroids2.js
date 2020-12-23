@@ -361,11 +361,13 @@ class Phrase
 {
 	//exposed methods:
 	constructor(x, y, string) {
-    	this.radius = 40;
+    	this.radius = 200;
 		this.color = 'white';
 		this.pos = Vec2D.create(x, y);
 		this.string = string;
 		this.size = 20;
+		this.opacity = 0;
+		this.toOpaque = false;
   	}	
 }
 //ship.js ...........................................................
@@ -507,7 +509,7 @@ function(callback)
 	window.setTimeout(callback, 16.6);
 };
 
-var hieghtProportion = 10;
+var hieghtProportion = 7.7;
 window.onload = function()
 {
 
@@ -549,29 +551,81 @@ window.onload = function()
 	createRect(-250, 2000, 70, 7, 0);
 	createRect(250, 2150, 70, 7, 0);
 
-
-	createRect(250, 2350, 10, 10, 0);
-
-
 	createCheckpoint(0, 1300);
 	createPhrase(0, 1200, "Look a checkpoint!");
 
-	createPhrase(200, 1500, "Collide with orange rects");
-	createPhrase(200, 1530, "to show more information");
+	createPhrase(-200, 1500, "Collide with orange rects");
+	createPhrase(-200, 1530, "to show more information");
 
+	createRect(0, 2400, 10, 10, 0);
+	createRect(200, 2400, 10, 10, 0);
+	createRect(-200, 2400, 10, 10, 0);
+
+	createRect(100, 2600, 10, 10, 0);
+	createRect(-100, 2600, 10, 10, 0);
+	createRect(-300, 2600, 10, 10, 0);
+	createRect(300, 2600, 10, 10, 0);
+
+	createRect(0, 2800, 10, 10, 0);
+	createRect(200, 2800, 10, 10, 0);
+	createRect(-200, 2800, 10, 10, 0);
+
+	createRect(250, 2950, 10, 10, 0);
+	createRect(-250, 2950, 10, 10, 0);
+	createRect(-125, 2950, 10, 10, 0);
+	createRect(125, 2950, 10, 10, 0);
+
+	createCheckpoint(0, 3100);
+
+	createRect(-250, 3200, 50, 7, 0);
+	createRect(-250, 3500, 50, 7, 0);
+	createRect(-85, 3350, 7, 30, 0);
+	createPhrase(180, 3350, "Remember!");
+	createPhrase(180, 3380, "You can collide with anything orange.");
+
+
+	createRect(-250, 3630, 72, 7, 0);
+	createRect(0, 3756, 7, 40, 0);
+	createRect(250, 3882, 72, 7, 0);
+
+	createRect(-250, 3630, 72, 7, 0);
+	createRect(0, 3756, 7, 40, 0);
+	createRect(250, 3882, 72, 7, 0);
+
+	createRect(-250, 4130, 72, 7, 0);
+	createRect(0, 4256, 7, 40, 0);
+	createRect(250, 4382, 72, 7, 0);
+
+	createCheckpoint(-200, 4356);
+	createRect(0, 4562, 7, 40, 0);
+	createRect(0, 4800, 80, 7, 0);
+	createRect(0, 4950, 60, 7, 0);
+	createRect(0, 5100, 40, 7, 0);
+
+	createRect(-460, 5500, 50, 100, 0);
+	createRect(-360, 5500, 50, 75, 0);
+	createRect(-250, 5500, 50, 50, 0);
+
+	createRect(460, 5500, 50, 100, 0);
+	createRect(360, 5500, 50, 75, 0);
+	createRect(250, 5500, 50, 50, 0);
 
 	var about = generateContactor(200 , 1600, "mai", "Intro", "IntroModal");
 	about.rectH = 10;
 	about.rectW = 10 * canvasH/canvasW;
 
 
-	var second = generateContactor(200 , 2200, "mai", "Parallax", "Parallax");
+	var second = generateContactor(-230 , 3350, "mai", "Parallax", "Parallax");
 	second.rectH = 10;
 	second.rectW = 10 * canvasH/canvasW;
 
-	var third = generateContactor(200 , 2600, "mai", "GCGM", "Jams");
+	var third = generateContactor(200 , 4556, "mai", "GCGM", "Jams");
 	third.rectH = 10;
 	third.rectW = 10 * canvasH/canvasW;
+
+	var end = generateContactor(0 , 5800, "mai", "Final", "Start");
+	end.rectH = 10;
+	end.rectW = 10 * canvasH/canvasW;
 
 	context.font = "20px monospace";
 
@@ -955,6 +1009,7 @@ function checkCollisions()
 	checkShipContactorCollisions();
 	checkShipRectsCollisions();
 	checkCheckpointsCollisions();
+	checkPhrasesCollisions();
 }
 
 function checkBulletAsteroidCollisions()
@@ -1076,6 +1131,25 @@ function checkCheckpointsCollisions()
 	}
 }
 
+function checkPhrasesCollisions()
+{
+	var i = phrases.length - 1;
+
+	for(i; i > -1; --i)
+	{
+		var a = phrases[i];
+		var s = ship;
+
+		if(checkDistanceCollision(a, s) && !a.toOpaque)
+		{
+			a.toOpaque = true;
+		}
+		else if (a.toOpaque)
+		{
+			a.opacity = lerp(a.opacity, 1, 0.01);
+		}
+	}
+}
 
 function generateShipExplosion()
 {
@@ -1358,7 +1432,7 @@ function renderPhrases(){
 	for(i; i > -1; --i)
 	{
 		var a = phrases[i];
-		context.fillStyle = a.color;
+		context.fillStyle = "rgba(255,255,255," + a.opacity + ")";
 		context.textAlign = "center";
 		context.fillText(a.string, (canvasRect.width/2) + a.pos.getX(), a.pos.getY());
 	}
