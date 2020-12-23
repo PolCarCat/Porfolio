@@ -623,7 +623,7 @@ window.onload = function()
 	third.rectH = 10;
 	third.rectW = 10 * canvasH/canvasW;
 
-	var end = generateContactor(0 , 5800, "mai", "Final", "Start");
+	var end = generateContactor(0 , 5800, "mai", "End", "Final");
 	end.rectH = 10;
 	end.rectW = 10 * canvasH/canvasW;
 
