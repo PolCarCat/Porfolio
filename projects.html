@@ -11,12 +11,10 @@
         body {
 
             margin: 0;
-            background: #262626;
 
-            background-color: #222;
-            background-image: linear-gradient(transparent 60%, rgba(0,0,0) 50%);
-            background-size: 10px 10px;
-        }
+            background-image:  radial-gradient(#960e29 1px, transparent 1px), radial-gradient(#960e29 1px, #111 1px);
+            background-size: 40px 40px;
+            background-position: 0 0,20px 20px;        }
 
         .divider {
             background-color:white; 
@@ -59,7 +57,8 @@
           float: left;
           width: 25%;
           display: none; /* Hide columns by default */
-          height: 300px;
+          height: 15vw;
+
           padding: 8px;
           transition: all 0.4s ease 0s;
         }
@@ -98,7 +97,7 @@
             color: #FFF;
             background: rgba(0,0,0,0);
             padding: 10px 25px;
-            border: 3px solid #FFF;
+            border: 2px solid #FFF;
             display: inline-block;
             transition: all 0.4s ease 0s;
             font-size: 1em;
@@ -158,8 +157,16 @@
           width: 100%;
           opacity: 0;
           transition: .5s ease;
-          background-color: rgba(255,255,255,0.7);
+          border-radius: 0.2vw;
+          background-color: rgba(255,255,255,0.9);
+        }
 
+        .overlay h3{
+          font-size: 1vw;
+        }
+
+        .overlay p{
+          font-size: 0.8vw;
         }
 
         .content:hover .overlay {
@@ -172,6 +179,7 @@
         #innerBody{
             display:block;
             margin-top: 20px;
+            margin-bottom: 40px;
             margin-left: 10vw;
             width: 80vw;
             background-color:  rgba(0,0,0,0.8);
@@ -191,7 +199,7 @@
 <body>
     <div id = "Header">
         <a onclick="window.location.href='index.html'">&#8592 HOME</a>
-        <a onclick="window.location.href='about.html'">ABOUT ME</a>
+        <a onclick="window.location.href='about.html'">ABOUT</a>
     </div>
     <div id = "innerBody">
       <div id="ProjectsHeader">
