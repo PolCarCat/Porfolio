@@ -62,6 +62,24 @@
           padding: 8px;
           transition: all 0.4s ease 0s;
         }
+                /* Create three equal columns that floats next to each other */
+        .column2 {
+          float: left;
+          width: 90%;
+          height: 15vw;
+
+          padding: 8px;
+          transition: all 0.4s ease 0s;
+        }
+        .column3 {
+          float: left;
+          width: 32%;
+          height: 15vw;
+
+          padding: 8px;
+          transition: all 0.4s ease 0s;
+        }
+
 
         /* Clear floats after rows */
         .row:after {
@@ -79,6 +97,14 @@
           text-align: center;
         }
 
+        .content2 {
+          position: relative;
+          background-color: black;
+          padding: 5px;
+          height: 100%;
+
+        }
+
         .imgContainer{
           height: 100%;
           overflow: hidden;
@@ -86,6 +112,23 @@
           display: flex;
           justify-content: center;
           align-items: center; 
+        }
+
+        .imgContainer2{
+          height: 100%;
+          width: 33%;
+          overflow: hidden;
+          text-align: left;
+          display: inline-block;
+        }
+
+        .textContainer{
+          height: 100%;
+          width: 50%;
+          color: white;
+          display: inline-block;
+          vertical-align: top;
+          text-align: left;
         }
 
         .show {
@@ -119,8 +162,9 @@
         }
 
         h1{
-        font-size: 2.7em;
-        margin: 1vh 0;
+        font-size: 2.5em;
+        margin-top: 3vh;
+        margin-bottom: 1vh;
         color: white;
         }
 
@@ -161,6 +205,21 @@
           background-color: rgba(255,255,255,0.9);
         }
 
+        .overlay2 {
+          position: absolute;
+          padding: 20% 5px 5px 5px;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 100%;
+          width: 100%;
+          opacity: 0;
+          transition: .5s ease;
+          border-radius: 0.2vw;
+          background-color: rgba(255,255,255,0.4);
+        }
+
         .overlay h3{
           font-size: 1vw;
         }
@@ -169,7 +228,14 @@
           font-size: 0.8vw;
         }
 
-        .content:hover .overlay {
+        .content:hover .overlay  {
+          opacity: 1;
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        .content:hover .overlay2  {
           opacity: 1;
           color: black;
           text-decoration: none;
@@ -186,6 +252,10 @@
             padding: 1.5vh 1.5vw;
         }
 
+        hr{
+          margin: 10vh; 
+           
+        }
     </style>
     <link rel="stylesheet" href="modals.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
@@ -203,9 +273,51 @@
     </div>
     <div id = "innerBody">
       <div id="ProjectsHeader">
-          <h1>Projects</h1>
-          <p> Here you will find some of the best projects that I've made during this four years of game development </p>
-          <p> Most of them are made as university projects </p>
+          <h1 style="margin-bottom: 8vh;">2Awesome Studio</h1>
+          <p style="text-align: center;"> I worked two years and ten months in 2Awesome Studio as a game designer.<br> During this time I worked on these projects </p>
+      </div>
+      <div class="ProjectsDiv">
+      <!-- Portfolio Gallery Grid -->
+      <div class="row">
+        <div class="column3">
+          <div class="content" onclick ="ShowModal('Malita')">
+                <div class="overlay">
+                  <h3>Altered Alma</h3>
+                  <p>A classic Metroidvania  with RPG elements, dating sim features, a slick pixel-art presentation, and a gripping story. Whether you want to beat up bad guys, find love, or just explore the beautiful cityscape, Neo-Barcelona awaits!</p>
+                </div>
+            <div class = "imgContainer">
+              <img src="data/Games/AlteredAlma.webp" alt="Malita" style="height:100%"> 
+            </div>
+          </div>
+        </div>
+        <div class="column3">
+          <div class="content" onclick ="ShowModal('Parallax')">
+            <div class="overlay">
+                  <h3>Aeon Drive</h3>
+                  <p>Award winning 2D platformer made in C++</p>
+            </div>
+            <div class = "imgContainer">
+              <img src="data/Games/AeonDrive.jpg" alt="Lights" style="height:100%">
+            </div>
+          </div>
+        </div>
+        <div class="column3">
+          <div class="content" onclick ="ShowModal('Mehgine')">
+            <div class="overlay">
+                  <h3>AK-xolotl</h3>
+                  <p>I build a game engine with OpenGL in C++, with a particle subsystem specialization.</p>
+            </div>
+            <div class = "imgContainer">
+              <img src="data/Games/AK.jpg" alt="Lights" style="height:100%">
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <div id="ProjectsHeader">
+          <h1>University projects</h1>
+          <p> Here you will find some of the best projects that I've made during the four years of the degree </p>
       </div>
       <div class="ProjectsDiv">
       <div id="myBtnContainer">
